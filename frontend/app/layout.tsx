@@ -31,16 +31,16 @@ export default function RootLayout({
     			<meta name="color-scheme" content="light dark" />
 				{/* <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> */}
 
-				<link rel="icon" type="image/png" href="/icons/favicon/favicon-96x96.png" sizes="96x96" />
-				<link rel="icon" type="image/svg+xml" href="/icons/favicon/favicon.svg" />
-				<link rel="shortcut icon" href="/icons/favicon/favicon.ico" />
-				<link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon/apple-touch-icon.png" />
+				<link rel="icon" type="image/png" href="@/public/icons/favicon/favicon-96x96.png" sizes="96x96" />
+				<link rel="icon" type="image/svg+xml" href="@/public/icons/favicon/favicon.svg" />
+				<link rel="shortcut icon" href="@/public/icons/favicon/favicon.ico" />
+				<link rel="apple-touch-icon" sizes="180x180" href="@/public/icons/favicon/apple-touch-icon.png" />
 				<meta name="apple-mobile-web-app-title" content="Tasks" />
-				<link rel="manifest" href="/icons/favicon/darksite.webmanifest" />
+				<link rel="manifest" href="@/public/icons/favicon/darkmanifest.json" />
 			</Head>
-      <body className={`${pixelifySans.variable} ${notoSansMono.variable}`}>
-        {children}
-      </body>
-    </html>
-  );
+      		<body className={`${pixelifySans.variable} ${notoSansMono.variable}`}>
+        		{children}
+     		</body>
+    	</html>
+  	);
 }

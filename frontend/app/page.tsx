@@ -1,7 +1,21 @@
-import style from "@/app/temp.module.css"
+import style from "@/app/page.module.css"
 // import List from "@/components/List"
 // import Task from "@/components/Task"
-// import Button from "@/components/Button"
+import Button from "@/components/Basic Components/Button"
+import { List } from "@/components/ListView"
+
+export interface User {
+	username: string;
+	password: string;
+	list: List[];
+	settings: AppSettings;
+}
+
+export interface AppSettings {
+	ListDirectory: string;
+	APIPath: string;
+	DeleteCompletedTasks: boolean;
+}
 
 
 export default function Home() {
@@ -14,14 +28,15 @@ export default function Home() {
 				<div className={style["list_menu_lists"]}>
 				</div>
 				<div className={style["list_menu_panel"]}>
-					<button type="button" className={style["list_menu_panel_button special"]}>
-						<span className={`material-symbols-rounded ${undefined}`}>
+					{/* <button type="button" className={`${style.list_menu_panel_button} ${style.special}`}>
+						<span className={`material-symbols-rounded`}>
 							add_circle
 						</span>
 						<h3>
 							List
 						</h3>
-					</button>
+					</button> */}
+					<Button iconName="add_circle" className={``} variant={"special"}>List</Button>
 				</div>
         	</div>
         	<div className={style["main_view"]}>
