@@ -43,7 +43,7 @@
 }
 
 .drag_region {
-    app-region: drag; 
+    /* app-region: drag; */
     -webkit-user-select: none;
     user-select: none;
     position: fixed;
@@ -676,6 +676,4 @@ select.edit_panel_item_value > option {
         grid-column: 2 / 3;
         grid-row: 2 / 3;
     }
-
-    
 }

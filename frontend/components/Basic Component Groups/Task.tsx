@@ -1,11 +1,4 @@
-export interface task {
-	name: string;
-	importance: string;
-	completion: boolean;
-	note: string | null;
-	index: number;
-	id: string;
-}
+
 
 export const Task: React.FC<{ taskNum: number; importance: string; completion: boolean; id: string; children?: React.ReactNode; }> = ({ taskNum, importance, completion, children }) => {
     return (
