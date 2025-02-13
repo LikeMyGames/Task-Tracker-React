@@ -85,6 +85,7 @@ body {
 * {
   box-sizing: border-box;
   font-family: var(--main-font);
+  transition: 125ms;
   /* app-region: no-drag; */
   /* padding: 0px; */
   /* margin: 0px; */
