@@ -9,6 +9,8 @@
 		'wght' 700,
     'GRAD' 0,
     'opsz' 48;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 :root{
@@ -85,7 +87,7 @@ body {
 * {
   box-sizing: border-box;
   font-family: var(--main-font);
-  transition: 125ms;
+  /* transition: 125ms; */
   /* app-region: no-drag; */
   /* padding: 0px; */
   /* margin: 0px; */
@@ -150,13 +152,13 @@ button, input, select, textarea {
 }
 
 button:hover, input:hover, select:hover, textarea:hover {
-    transform: translate(-5px, -5px);
-    filter: drop-shadow(5px 5px var(--accent-color));
+    transform: translate(-0.2604vw, -0.2604vw);
+    filter: drop-shadow(0.2604vw 0.2604vw var(--accent-color));
 }
 
 button:active, input:active, select:active, textarea:active {
-    transform: translate(-2.5px, -2.5px);
-    filter: drop-shadow(2.5px 2.5px var(--accent-color))
+    transform: translate(-0.1302vw, -0.1302vw);
+    filter: drop-shadow(0.1302vw 0.1302vw var(--accent-color))
 }
 
 input:focus, select:focus, textarea:focus {
@@ -178,8 +180,8 @@ color: var(--error-color);
 
 .error:active {
   background-color: var(--primary-color);
-color: var(--error-color);
-  filter: drop-shadow(2.5px 2.5px var(--error-color))
+  color: var(--error-color);
+  filter: drop-shadow(0.1302vw 0.1302vw var(--error-color))
 }
 
 .special {
@@ -197,11 +199,11 @@ color: var(--error-color);
 .special:hover, .normal:hover {
 background-color: var(--primary-color);
 color: var(--accent-color);
-  transform: translate(-5px, -5px);
-  filter: drop-shadow(5px 5px var(--accent-color));
+  transform: translate(-0.2604vw, -0.2604vw);
+  filter: drop-shadow(0.2604vw 0.2604vw var(--accent-color));
 }
 
 .special:active, .normal:active {
-  transform: translate(-2.5px, -2.5px);
-  filter: drop-shadow(2.5px 2.5px var(--accent-color))
+  transform: translate(-0.1302vw, -0.1302vw);
+  filter: drop-shadow(0.1302vw 0.1302vw var(--accent-color))
 }

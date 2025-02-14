@@ -3,6 +3,9 @@ import style from "@/components/Login/Login.module.css";
 import Icon from "@/components/Basic Components/Icon"
 import TextInput from "@/components/Login/Basic Components/TextInput"
 import Button from "@/components/Login/Basic Components/Button"
+import GoogleIcon from "@/public/google.svg"
+import GithubIcon from "@/public/github.svg"
+import Image from "next/image";
 
 
 export default function LoginOption() {
@@ -24,6 +27,18 @@ export default function LoginOption() {
 					<h4 className={style.card_option_seperator_text}>or continue with</h4>
 					<div className={style.card_option_seperator_bar} />
 				</div>
+				<button type={"button"} className={style.card_option}>
+					<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
+					<h3 className={style.card_button_text}>
+						Google
+					</h3>
+				</button>
+				<button type={"button"} className={style.card_option}>
+					<Image alt="Github Icon" src={GithubIcon} className={style.card_option_icon}></Image>
+					<h3 className={style.card_button_text}>
+						Github
+					</h3>
+				</button>
 			</div>
 			<div className={`${style.card} ${style.card_small}`}>
 				<Icon>devices</Icon>
