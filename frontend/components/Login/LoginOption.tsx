@@ -8,11 +8,17 @@ import Button from "@/components/Login/Basic Components/Button"
 import GoogleIcon from "@/public/google.svg"
 import GithubIcon from "@/public/github.svg"
 import Image from "next/image";
+import Head from "next/head";
 
 
 export default function LoginOption() {
 	return (
 		<div className={style.main}>
+			<Head>
+				<link rel="icon" type="image/png" href="@/public/icons/favicon/favicon-96x96.png" sizes="96x96" />
+				<link rel="icon" type="image/svg+xml" href="@/public/icons/favicon/favicon.svg" />
+				<link rel="shortcut icon" href="@/public/icons/favicon/favicon.ico" />
+			</Head>
 			<button type={"button"} className={`${style.card} ${style.card_small}`}>
 				<Icon>person_add</Icon>
 			</button>

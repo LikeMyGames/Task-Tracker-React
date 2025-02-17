@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
     return {
         lang: "en-us",
         name: "Task Tracker",
-        description: "A Web App that allows users to keep track of and manage their tasks.",
+        description: "A Web App that allows users to keep track of and manage their tasks",
         short_name: "Tasks",
         start_url: "/",
         orientation: "any",
