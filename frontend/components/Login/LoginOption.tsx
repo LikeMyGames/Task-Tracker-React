@@ -1,4 +1,6 @@
 
+import { login } from "@/app/actions"
+
 import style from "@/components/Login/Login.module.css";
 import Icon from "@/components/Basic Components/Icon"
 import TextInput from "@/components/Login/Basic Components/TextInput"
@@ -11,15 +13,15 @@ import Image from "next/image";
 export default function LoginOption() {
 	return (
 		<div className={style.main}>
-			<div className={`${style.card} ${style.card_small}`}>
+			<button type={"button"} className={`${style.card} ${style.card_small}`}>
 				<Icon>person_add</Icon>
-			</div>
-			<div className={`${style.card} ${style.card_big}`}>
+			</button>
+			<form action={login} className={`${style.card} ${style.card_big}`}>
 				<Icon>person</Icon>
 				<h2 className={style.card_text_main}>Sign In</h2>
-				<TextInput type="email" title={"username"}>Username or Email</TextInput>
+				<TextInput type="email" title={"email"}>Username or Email</TextInput>
 				<TextInput type="password" title={"password"}>Password</TextInput>
-				<Button className="special">
+				<Button className="special" type={"submit"}>
 					<h3 className={style.card_button_text}>Sign In</h3>
 				</Button>
 				<div className={style.card_option_seperator}>
@@ -29,20 +31,24 @@ export default function LoginOption() {
 				</div>
 				<button type={"button"} className={style.card_option}>
 					<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
-					<h3 className={style.card_button_text}>
+					<h3 className={style.card_button_text} style={{
+						color: "var(--text-color)"
+					}}>
 						Google
 					</h3>
 				</button>
 				<button type={"button"} className={style.card_option}>
 					<Image alt="Github Icon" src={GithubIcon} className={style.card_option_icon}></Image>
-					<h3 className={style.card_button_text}>
+					<h3 className={style.card_button_text} style={{
+						color: "var(--text-color)"
+					}}>
 						Github
 					</h3>
 				</button>
-			</div>
-			<div className={`${style.card} ${style.card_small}`}>
+			</form>
+			<button type={"button"} className={`${style.card} ${style.card_small}`}>
 				<Icon>devices</Icon>
-			</div>
+			</button>
 		</div>
 	);
 }

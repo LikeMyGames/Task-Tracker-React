@@ -1,6 +1,6 @@
 .main {
-    height: 100vh;
-    width: 100vw;
+    height: 100svh;
+    width: 100dvw;
 
     display: flex;
     justify-content: center;
@@ -17,9 +17,9 @@
 
     background-color: var(--secondary-color);
 	/* border-radius: 50px; */
-	border-radius: 2.604vw;
+	border-radius: 2.604dvw;
 	/* padding-inline: 68px; */
-	padding-inline: 3.541vw;
+	padding-inline: 3.541dvw;
 }
 
 .card > span {
@@ -32,18 +32,18 @@
 }
 
 .card_big {
-	height: 39.06vw;
+	height: 39.06dvw;
 
 	aspect-ratio: 2 / 3;
     /* margin-inline: 100px; */
-	margin-inline: 5.208vw;
+	margin-inline: 5.208dvw;
 	justify-content: flex-start;
 }
 
 .card_big > span {
 	/* top: -10px; */
 	/* font-size: 225px; */
-	font-size: 11.71vw;
+	font-size: 11.71dvw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -51,29 +51,29 @@
 
 .card_text_main {
 	color: var(--accent-color);
-	font-size: 2.7325vw;
+	font-size: 2.7325dvw;
 	/* font-size: 40pt; */
 	/* margin-top: -10px; */
-	margin: 0vw;
-	margin-bottom: 0.2604vw;
+	margin: 0dvw;
+	margin-bottom: 0.2604dvw;
 }
 
 .card_input {
-	width: 18.88vw;
+	width: 18.88dvw;
 	/* height: 75px; */
-	height: 3.906vw;
+	height: 3.906dvw;
 	/* margin-bottom: 5px; */
-	margin-bottom: 0.2604vw;
+	margin-bottom: 0.2604dvw;
 }
 
 .card_input:hover > .card_input_text {
-	transform: translate(-0.2604vw, -0.2604vw);
-	filter: drop-shadow(0.2604vw 0.2604vw var(--accent-color));
+	transform: translate(-0.2604dvw, -0.2604dvw);
+	filter: drop-shadow(0.2604dvw 0.2604dvw var(--accent-color));
 	color: var(--accent-color)
 }
 
 .card_input:hover > .card_input_title {
-	transform: translate(-0.2604vw, -0.2604vw);
+	transform: translate(-0.2604dvw, -0.2604dvw);
 	color: var(--accent-color)
 }
 
@@ -84,19 +84,19 @@
 }
 
 .card_input_text {
-	width: 18.88vw;
+	width: 18.88dvw;
 	/* height: 50px; */
-	height: 2.604vw;
+	height: 2.604dvw;
 	/* border-radius: 12.5px; */
-	border-radius: 0.651vw;
+	border-radius: 0.651dvw;
 	border: none;
 	outline: none;
 	background-color: var(--primary-color);
 	/* padding-left: 15px; */
-	padding-left: 0.7812vw;
+	padding-left: 0.7812dvw;
 	font-size: 16pt;
-	font-size: 1.093vw;
-	margin: 0vw;
+	font-size: 1.093dvw;
+	margin: 0dvw;
 	transform: none;
 }
 
@@ -108,10 +108,10 @@
 }
 
 .card_input_title {
-	margin: 0vw;
-	padding: 0vw;
-	font-size: 1.093vw;
-	line-height: 1.093vw;
+	margin: 0dvw;
+	padding: 0dvw;
+	font-size: 1.093dvw;
+	line-height: 1.093dvw;
 	/* font-size: 16pt; */
 	color: var(--primary-color);
 	-webkit-user-select: none;
@@ -131,34 +131,34 @@
 
 .card_button {
 	/* margin-top: 15px; */
-	margin-top: 0.7812vw;
+	margin-top: 0.7812dvw;
 	/* height: 50px; */
-	height: 2.604vw;
-	width: 18.88vw;
+	height: 2.604dvw;
+	width: 18.88dvw;
 	border: none;
 	/* border-radius: 12.5px; */
-	border-radius: 0.651vw;
+	border-radius: 0.651dvw;
 }
 
 .card_button_text {
 	/* font-size: 24pt; */
-	font-size: 1.6395vw;
+	font-size: 1.6395dvw;
 	margin: 0px;
 }
 
 .card_option_seperator {
 	display: flex;
-	width: 18.88vw;
+	width: 18.88dvw;
 	justify-content: center;
 	align-items: center;
-	margin-block: 1.302vw;
+	margin-block: 1.302dvw;
 }
 
 .card_option_seperator_bar {
 	/* height: 3px; */
-	height: 0.1562vw;
+	height: 0.1562dvw;
 	/* width: 75px; */
-	width: 3.906vw;
+	width: 3.906dvw;
 	justify-self: flex-start;
 	background-color: rgba(234, 241, 236, 0.15);
 }
@@ -169,7 +169,7 @@
 
 .card_option_seperator_text {
 	/* font-size: 16pt; */
-	font-size: 1.093vw;
+	font-size: 1.093dvw;
 	text-transform: uppercase;
 	color: var(--accent-color);
 	margin: 0px;
@@ -180,41 +180,41 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 18.88vw;
-	height: 2.604vw;
-	border-radius: 0.651vw;
+	width: 18.88dvw;
+	height: 2.604dvw;
+	border-radius: 0.651dvw;
 	border: none;
 	background-color: var(--primary-color);
 
-	margin-bottom: 0.7812vw;
+	margin-bottom: 0.7812dvw;
 }
 
 .card_option_icon {
-	height: 1.562vw;
-	min-height: 1.562vw;
-	min-height: 1.562vw;
-	width: 1.562vw;
-	min-width: 1.562vw;
-	min-width: 1.562vw;
+	height: 1.562dvw;
+	min-height: 1.562dvw;
+	min-height: 1.562dvw;
+	width: auto;
 	/* margin-right: 30px; */
-	margin-right: 1.562vw;
+	margin-right: 1.562dvw;
 }
 
 .card_small {
-	height: 25.39vw;
+	height: 25.39dvw;
     /* height: 487.5px; */
 	/* aspect-ratio: 2 / 3; */
     /* width: 325px; */
-	width: 16.92vw;
+	width: 16.92dvw;
 	/* border-radius: 25px; */
-	border-radius: 1.302vw;
+	border-radius: 1.302dvw;
+	border: none;
+	outline: none;
 }
 
 .card_small > span {
     /* width: 300px; */
     /* aspect-ratio: 1 / 1; */
 	width: fit-content;
-    font-size: 15.62vw;
+    font-size: 15.62dvw;
     display: flex;
     justify-content: center;
     align-items: center;
