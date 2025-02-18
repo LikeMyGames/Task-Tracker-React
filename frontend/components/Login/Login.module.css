@@ -56,6 +56,14 @@
 	/* margin-top: -10px; */
 	margin: 0dvw;
 	margin-bottom: 0.2604dvw;
+	white-space: nowrap;
+    overflow: hidden;
+	width: 18.88dvw;
+	overflow: visible;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    /* text-overflow: ellipsis; */
 }
 
 .card_input {
@@ -144,6 +152,13 @@
 	/* font-size: 24pt; */
 	font-size: 1.6395dvw;
 	margin: 0px;
+}
+
+.card_button_descriptor {
+	font-size: 1.093dvw;
+	color: var(--primary-color);
+	margin: 0px;
+	text-align: center;
 }
 
 .card_option_seperator {
