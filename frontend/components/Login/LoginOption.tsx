@@ -1,5 +1,5 @@
 
-import { login } from "@/app/actions"
+import { login, loginProvider, signup } from "@/app/actions"
 
 import style from "@/components/Login/Login.module.css";
 import Icon from "@/components/Basic Components/Icon"
@@ -33,7 +33,7 @@ export default function LoginOption() {
 						<h4 className={style.card_option_seperator_text}>or continue with</h4>
 						<div className={style.card_option_seperator_bar} />
 					</div>
-					<button type={"button"} className={style.card_option}>
+					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('google-oauth2')}}>
 						<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
 						<h3 className={style.card_button_text} style={{
 							color: "var(--text-color)"
@@ -41,7 +41,7 @@ export default function LoginOption() {
 							Google
 						</h3>
 					</button>
-					<button type={"button"} className={style.card_option}>
+					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('github')}}>
 						<Image alt="Github Icon" src={GithubIcon} className={style.card_option_icon}></Image>
 						<h3 className={style.card_button_text} style={{
 							color: "var(--text-color)"
@@ -66,7 +66,7 @@ export default function LoginOption() {
 				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => {setChoice("local")}}>
 					<Icon>devices</Icon>
 				</button>
-				<form action={login} className={`${style.card} ${style.card_big}`}>
+				<form action={signup} className={`${style.card} ${style.card_big}`}>
 					<Icon>person_add</Icon>
 					<h2 className={style.card_text_main}>Create Account</h2>
 					<TextInput type="email" title={"email"}>Username or Email</TextInput>
@@ -79,7 +79,7 @@ export default function LoginOption() {
 						<h4 className={style.card_option_seperator_text}>or continue with</h4>
 						<div className={style.card_option_seperator_bar} />
 					</div>
-					<button type={"button"} className={style.card_option}>
+					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('google-oauth2')}}>
 						<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
 						<h3 className={style.card_button_text} style={{
 							color: "var(--text-color)"
@@ -87,7 +87,7 @@ export default function LoginOption() {
 							Google
 						</h3>
 					</button>
-					<button type={"button"} className={style.card_option}>
+					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('github')}}>
 						<Image alt="Github Icon" src={GithubIcon} className={style.card_option_icon}></Image>
 						<h3 className={style.card_button_text} style={{
 							color: "var(--text-color)"
