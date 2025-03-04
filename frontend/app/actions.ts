@@ -9,7 +9,8 @@ const options = {
     responseType: 'id_token',
 }
 
-let accessToken
+export let accessToken = "";
+let userGlobal: auth0.Auth0UserProfile | null = null;
 
 // const webAuth = new auth0.WebAuth(options);
 
@@ -32,7 +33,10 @@ export async function login( formData: FormData ) {
 
         if (authResult && authResult.accessToken) {
             localStorage.setItem("token", authResult.accessToken);
+            accessToken = authResult.accessToken;
+            console.log(accessToken)
             window.location.href = "/";
+            window.location.hash = "";
         }
     }))
 }
@@ -43,6 +47,7 @@ export async function loginProvider( provider: string) {
         connection: provider,
         responseType: 'id_token',
     }))
+    window.location.hash = "";
 }
 
 export async function signup( formData: FormData ) {
@@ -64,7 +69,8 @@ export async function signup( formData: FormData ) {
         if (authResult && authResult.accessToken) {
             localStorage.setItem("token", authResult.accessToken);
             accessToken = authResult.accessToken;
-            window.location.href = "/";
+            // window.location.href = "/";
+            window.location.hash = "";
         }
     })
 }
@@ -80,7 +86,8 @@ export function getUser() {
             if (err) {
                 return console.error(err)
             }
-            return user
+            userGlobal = user
         })
     })
+    return userGlobal
 }

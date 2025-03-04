@@ -1,11 +1,29 @@
 'use client'
 import LoginOption from "@/components/Login/LoginOption"
+import { getUser } from "./actions";
+import { createContext, useEffect, useState } from "react";
+
+const UserContext = createContext(null)
 
 export default function Home() {
-	console.log(process.env.NODE_ENV)
+	const [user, setUser] = useState(null)
+
+
 	return (
 		<>
-			<LoginOption></LoginOption>
+			<UserContext.Provider 
+				value={{
+					user,
+					setUser
+				}}
+			>
+
+			</UserContext.Provider>
+			{user == null ? 
+				<LoginOption></LoginOption>
+			: <>
+				logged in
+			</>}
 		</>
 	);
 }
