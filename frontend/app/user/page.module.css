@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.center {
+    display: grid;
+
+    height: 100vh;
+    /* width: minmax(200px, 1fr); */
+    width: 50vw;
+    padding-block: 5vw;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    background-color: red;
+}

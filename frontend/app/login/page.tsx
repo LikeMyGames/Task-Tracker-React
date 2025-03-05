@@ -1,6 +1,8 @@
 'use client'
 import auth0 from 'auth0-js'
-// import { redirect } from 'next/navigation';
+// import { ParseQuery } from '@/lib/URL'
+import { redirect } from 'next/navigation';
+import { useEffect } from 'react';
 
 const options = {
     domain:       'dev-tvx4tuhqxdxxw3wm.us.auth0.com',
@@ -13,22 +15,23 @@ const options = {
 const webAuth = new auth0.WebAuth(options)
 
 export default function LoginLanding() {
-    let userInfo;
-    webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
-        if (err) {
-            return console.log(err);
-        }
-        
-        webAuth.client.userInfo(authResult?.accessToken ?? "" , function(err, user) {
+    useEffect(() => {
+        let userInfo;
+        webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
             if (err) {
-                console.error(err);
-                return;
+                return console.log(err);
             }
-            localStorage.setItem("userInfo", JSON.stringify(user))
-            userInfo = user;
-            console.log(userInfo)
-        });
-    });
 
-    // redirect(`/list/${JSON.stringify(userInfo)}`)
+            webAuth.client.userInfo(authResult?.accessToken ?? "" , function(err, user) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                localStorage.setItem("userInfo", JSON.stringify(user))
+                userInfo = user;
+                console.log(userInfo)
+                redirect(`/user`)
+            });
+        });
+    }, [])
 }
