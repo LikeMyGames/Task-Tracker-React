@@ -1,10 +1,11 @@
-import List from "@/components/Lists"
+// import List from "@/components/Lists"
 
-export default interface User {
-    username: string;
-    password: string;
-    lists: List[];
-    settings: AppSettings;
+export interface User {
+    // username: string;
+    // password: string;
+    id: string;
+    lists: string[];
+    settings: string;
 }
 
 export interface AppSettings {

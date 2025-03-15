@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "auth0-js": "^9.28.0",
+    "cloudflare": "^4.1.0",
+    "d1-driver": "^2.0.2",
     "next": "^15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

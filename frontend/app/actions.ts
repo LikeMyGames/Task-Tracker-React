@@ -2,15 +2,29 @@
 import auth0 from 'auth0-js';
 import { PrintToCMD } from '@/lib/actions';
 
-const options = {
+// const options = {
+//     domain:       'dev-tvx4tuhqxdxxw3wm.us.auth0.com',
+//     clientID:     'mA7Fyvjn5KejbRpeD6FStgw9e4vW66Ws',
+//     redirectUri: 'http://localhost:3000/login',
+//     scope: 'openid profile email',
+//     responseType: 'id_token',
+// }
+
+const options = process.env.NODE_ENV === "development" ? {
     domain:       'dev-tvx4tuhqxdxxw3wm.us.auth0.com',
     clientID:     'mA7Fyvjn5KejbRpeD6FStgw9e4vW66Ws',
     redirectUri: 'http://localhost:3000/login',
     scope: 'openid profile email',
     responseType: 'id_token',
+} : {
+    domain:       'dev-tvx4tuhqxdxxw3wm.us.auth0.com',
+    clientID:     'mA7Fyvjn5KejbRpeD6FStgw9e4vW66Ws',
+    redirectUri: 'http://tasktracker.dcamill.com/login',
+    scope: 'openid profile email',
+    responseType: 'id_token',
 }
 
-export let accessToken = "";
+let accessToken = "";
 let userGlobal: auth0.Auth0UserProfile;
 
 // const webAuth = new auth0.WebAuth(options);

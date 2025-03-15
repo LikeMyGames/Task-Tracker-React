@@ -28,10 +28,14 @@ export default function LoginOption() {
 					<Button className="special" type={"submit"}>
 						<h3 className={style.card_button_text}>Sign In</h3>
 					</Button>
-					<div className={style.card_option_seperator}>
+					{/* <div className={style.card_option_seperator}>
 						<div className={style.card_option_seperator_bar} />
 						<h4 className={style.card_option_seperator_text}>or continue with</h4>
 						<div className={style.card_option_seperator_bar} />
+					</div> */}
+					<div className={style.card_option_seperator}>
+						<div className={style.card_option_seperator_bar} />
+						<div className={style.card_option_seperator_text} >or continue with</div>
 					</div>
 					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('google-oauth2')}}>
 						<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
@@ -74,10 +78,14 @@ export default function LoginOption() {
 					<Button className="special" type={"submit"}>
 						<h3 className={style.card_button_text}>Create Account</h3>
 					</Button>
-					<div className={style.card_option_seperator}>
+					{/* <div className={style.card_option_seperator}>
 						<div className={style.card_option_seperator_bar} />
 						<h4 className={style.card_option_seperator_text}>or continue with</h4>
 						<div className={style.card_option_seperator_bar} />
+					</div> */}
+					<div className={style.card_option_seperator}>
+						<div className={style.card_option_seperator_bar} />
+						<div className={style.card_option_seperator_text} >or continue with</div>
 					</div>
 					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('google-oauth2')}}>
 						<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
@@ -122,11 +130,15 @@ export default function LoginOption() {
 					<Button className="special" type={"button"}>
 						<h3 className={style.card_button_text}>On Device</h3>
 					</Button>
-					<p className={style.card_button_descriptor}>Stores data in directly on your device</p>
+					<p className={style.card_button_descriptor}>Stores data directly on your device</p>
+					{/* <div className={style.card_option_seperator}>
+						<div className={style.card_option_seperator_bar} />
+						<h4 className={style.card_option_seperator_text}>or</h4>
+						<div className={style.card_option_seperator_bar} />
+					</div> */}
 					<div className={style.card_option_seperator}>
 						<div className={style.card_option_seperator_bar} />
-						<h4 className={style.card_option_seperator_text}>or continue with</h4>
-						<div className={style.card_option_seperator_bar} />
+						<div className={style.card_option_seperator_text} >or</div>
 					</div>
 					<Button className="special" onClick={() => redirect("/docs")} >
 						<h3 className={style.card_button_text}>Learn More</h3>
