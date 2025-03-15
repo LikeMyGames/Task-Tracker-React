@@ -2,10 +2,14 @@
 
 import { D1 } from 'd1-driver'
 import { User } from "@/components/User"
+import { resourceLimits } from 'worker_threads';
 
 const d1 = new D1(process.env['CLOUDFLARE_ACCOUNT_ID'] ?? "", process.env['CLOUDFLARE_API_TOKEN'] ?? "")
 
 export async function createUser(id: string): Promise<User> {
+    if(typeof id !== "string") {
+        throw new Error("Did not receive valid ID");
+    }
     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
         `INSERT INTO Users ( id, lists, settings ) VALUES ( ?, "[]", "{}" )`,
         [id]
@@ -13,13 +17,19 @@ export async function createUser(id: string): Promise<User> {
     response.result.forEach(result => {
         console.log(result.results[0])
     })
-    const user: User = {id: response.result[0].results[0].id, lists: response.result[0].results[0].lists, settings: response.result[0].results[0].settings};
-    return user;
+
+    const result = response.result[0].results[0]
+
+    if(result == undefined) {
+        return {id: "Could not create user", lists: [], settings: ""} as User;
+    }
+
+    return {id: result.id, lists: result.lists, settings: result.settings} as User;
 }
 
 export async function getUser(id: string): Promise<User> {
     if(typeof id !== "string") {
-        throw new Error("Did not recieve valid ID")
+        throw new Error("Did not receive valid ID")
     }
     console.log("Getting User: ", id)
     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
@@ -30,12 +40,15 @@ export async function getUser(id: string): Promise<User> {
         console.log(result.results[0])
     })
 
-    if(response.result[0].results[0] == undefined) {
+    const result = response.result[0].results[0]
+
+    if(result == undefined) {
         return {id: "User does not exist", lists: [], settings: ""} as User
     }
 
-    return {id: response.result[0].results[0].id, lists: response.result[0].results[0].lists, settings: response.result[0].results[0].settings} as User;
+    return {id: result.id, lists: result.lists, settings: result.settings} as User;
 }
+
 
 
 
