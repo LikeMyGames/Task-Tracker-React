@@ -4,10 +4,13 @@ import auth0 from 'auth0-js'
 import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
 
+
+
 const options = {
-    domain:       'dev-tvx4tuhqxdxxw3wm.us.auth0.com',
-    clientID:     'mA7Fyvjn5KejbRpeD6FStgw9e4vW66Ws',
-    redirectUri: 'http://localhost:3000',
+    domain: 'dev-tvx4tuhqxdxxw3wm.us.auth0.com',
+    clientID: 'mA7Fyvjn5KejbRpeD6FStgw9e4vW66Ws',
+    redirectUri: process.env["NODE_ENV"] == "development" ? 'http://localhost:3000' : 'https://tasktracker.dcamill.com',
+    // redirectUri: 'http://localhost:3000',
     scope: 'openid profile email',
     responseType: 'token',
 }

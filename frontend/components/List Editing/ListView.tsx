@@ -1,6 +1,6 @@
 import style from "@/app/page.module.css";
 import { Task } from "@/components/Basic Component Groups/Task";
-import List from "@/components/Lists"
+import List from "@/components/List"
 
 
 export const ListView: React.FC<{ list: List; textClass?: string }> = ({ list, textClass }) => {

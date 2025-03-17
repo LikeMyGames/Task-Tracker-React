@@ -1,8 +1,11 @@
-export default interface task {
+export interface Task {
 	name: string;
-	importance: string;
+	severity: string;
 	completion: boolean;
 	note: string | null;
 	index: number;
 	id: string;
+	dueDate: string;
+	dueTime: number;
+	repetition: string;
 }

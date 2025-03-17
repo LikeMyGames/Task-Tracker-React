@@ -1,10 +1,10 @@
-// import List from "@/components/Lists"
+import { List } from "@/components/List"
 
 export interface User {
     // username: string;
     // password: string;
     id: string;
-    lists: string[];
+    lists: List[];
     settings: string;
 }
 
