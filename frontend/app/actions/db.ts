@@ -12,7 +12,7 @@ export async function createUser(id: string): Promise<User> {
         throw new Error("User id is not valid");
     }
     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
-        `INSERT INTO Users ( id, lists, settings ) VALUES ( ?, "[]", "{}" )`,
+        `INSERT INTO Users ( id, lists, settings ) VALUES ( ?, "{}" )`,
         [id]
     )
     response.result.forEach(result => {
@@ -28,32 +28,75 @@ export async function createUser(id: string): Promise<User> {
     return {id: result.id, lists: result.lists, settings: result.settings} as User;
 }
 
+// export async function getUser(id: string): Promise<User> {
+//     if(typeof id !== "string") {
+//         throw new Error("User id is not valid")
+//     }
+//     console.log("Getting User: ", id)
+//     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+//         `SELECT * FROM Users WHERE id = ?;`,
+//         [id]
+//     );
+
+//     const result = response.result[0].results[0]
+
+//     if(result == undefined) {
+//         return {id: "User does not exist", lists: [], settings: ""} as User
+//     }
+
+//     const listIDs = JSON.parse(result.lists)
+//     const lists = [] as List[]
+//     for (const id of listIDs) {
+//         const list = await getList(id.toString())
+//         lists.push(list)
+//     }
+
+//     const user = {id: result.id, lists: lists, settings: result.settings} as User;
+//     console.log(user)
+//     return user;
+// }
+
 export async function getUser(id: string): Promise<User> {
-    if(typeof id !== "string") {
-        throw new Error("User id is not valid")
-    }
-    console.log("Getting User: ", id)
     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
         `SELECT * FROM Users WHERE id = ?;`,
         [id]
     );
+    const result = response.result[0].results[0] as User
+    // console.log("result id: ", result.id)
+    // result.lists = await getUserLists(id)
+    getUserLists(id).then((lists) => {
+        result.lists = lists
+    })
+    console.log(result)
+    // console.log("DB User result from ", id, ": ", result)
+    return result
+}
 
-    const result = response.result[0].results[0]
+export async function getUserLists(userID: string): Promise<List[]> {
+    const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+        `SELECT * FROM Lists WHERE owner_id = ?;`,
+        [userID]
+    );
+    const result = response.result[0].results as List[]
+    result.map(async list => {
+        list.tasks = [] as Task[]
+        getListTasks(list.id).then((tasks) => {
+            // console.log(tasks)
+            tasks.map(task => {
+                list.tasks.push(task)
+            })
+        })
+    })
+    // console.log("DB Lists result: ", result)
+    return result
+}
 
-    if(result == undefined) {
-        return {id: "User does not exist", lists: [], settings: ""} as User
-    }
-
-    const listIDs = JSON.parse(result.lists)
-    const lists = [] as List[]
-    for (const id of listIDs) {
-        const list = await getList(id.toString())
-        lists.push(list)
-    }
-
-    const user = {id: result.id, lists: lists, settings: result.settings} as User;
-    console.log(user)
-    return user;
+export async function getListTasks(listID: string): Promise<Task[]> {
+    const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+        `SELECT * FROM Tasks WHERE owner_id = ?;`,
+        [listID]
+    );
+    return response.result[0].results as Task[]
 }
 
 // export async function updateUser(newUser: User): Promise<boolean> {
@@ -95,30 +138,30 @@ export async function getUser(id: string): Promise<User> {
 //     return response.result[0].success
 // }
 
-async function getList(id: string): Promise<List> {
-    if(typeof id !== "string") {throw new Error("List id is not valid")}
+// async function getList(id: string): Promise<List> {
+//     if(typeof id !== "string") {throw new Error("List id is not valid")}
 
-    const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
-        `SELECT * FROM Lists WHERE id = ?;`,
-        [id]
-    );
+//     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+//         `SELECT * FROM Lists WHERE id = ?;`,
+//         [id]
+//     );
 
-    const result = response.result[0].results[0];
+//     const result = response.result[0].results[0];
 
-    if(result == undefined) {throw new Error("List does not exist")}
+//     if(result == undefined) {throw new Error("List does not exist")}
 
-    const taskIDs = JSON.parse(result.tasks)
-    const tasks = [] as Task[]
-    for (const id of taskIDs) {
-        const task = await getTask(id.toString())
-        tasks.push(task)
-    }
+//     const taskIDs = JSON.parse(result.tasks)
+//     const tasks = [] as Task[]
+//     for (const id of taskIDs) {
+//         const task = await getTask(id.toString())
+//         tasks.push(task)
+//     }
 
-    const list = {id: result.id, name: result.name, tasks: tasks} as List;
+//     const list = {id: result.id, name: result.name, tasks: tasks} as List;
 
-    return list;
+//     return list;
 
-}
+// }
 
 // export async function updateList(newList: List): Promise<boolean> {
 
@@ -132,28 +175,22 @@ export async function getNextListID() {
     console.log(response)
 }
 
-async function getTask(id: string): Promise<Task> {
-    if(typeof id !== "string") {throw new Error("Task id is not valid")};
+// async function getTask(id: string): Promise<Task> {
+//     if(typeof id !== "string") {throw new Error("Task id is not valid")};
 
-    const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
-        `SELECT * FROM Tasks WHERE id = ?;`,
-        [id]
-    );
+//     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+//         `SELECT * FROM Tasks WHERE id = ?;`,
+//         [id]
+//     );
 
-    const result = response.result[0].results[0];
+//     const result = response.result[0].results[0];
 
-    if(result == undefined) {throw new Error("Task does not exist")}
+//     if(result == undefined) {throw new Error("Task does not exist")}
 
-    return result as Task;
-}
-
-// export async function saveList(newList: List) {
-
+//     console.log("Task query result: ", result)
+//     console.log("Task query result as Task: ", result as Task)
+//     return result as Task;
 // }
-
-
-
-
 
 export async function createList() {
     console.log("will create list in db but not implemented");

@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react"
 import { User } from "@/components/User"
 import ListOption from "./components/ListOption/ListOption"
 import ListOptionLoading from "./components/ListOption/ListOptionLoading"
-import { List } from "@/components/List"
+import { List, ListSearch } from "@/components/List"
 import { ListDataItem } from "./components/ListDataItem/ListDataItem"
 import { Task } from "@/components/Task"
 import { EditListAttributes } from "./components/EditAttributes/EditListAttributes"
@@ -19,7 +19,7 @@ export default function Home() {
 	// const [ activeListID, setActiveListID ] = useState<string>("")
 	const [ activeList, setActiveList ] = useState<List | null>(null)
 	const [ activeTask, setActiveTask ] = useState<Task | null>(null)
-	const [ taskSearchQuery, setTaskSearchQuery ] = useState<string>("")
+	const [ taskSearch, setTaskSearch ] = useState<ListSearch | null>(null)
     
     function changeActiveList(id: string) {
 		// setActiveListID(id)
@@ -34,6 +34,10 @@ export default function Home() {
 		}) as Task | null)
 	}
 
+	function changeTaskSearch(search: ListSearch) {
+		setTaskSearch(search)
+	}
+
 	// function handleTaskComplete(id: string) {
 	// 	console.log("need to build function for task completion")
 	// 	console.log("completing task with id: ", id)
@@ -42,12 +46,14 @@ export default function Home() {
     useEffect(() => {
         userInfoRef.current = JSON.parse(localStorage.getItem("userInfo") ?? "") as UserInfo
         // console.log(userInfoRef.current.sub)
-        const getUserWithID = getUser.bind(null, userInfoRef.current.sub as string)
-        getUserWithID().then((res) => {
-            setUser(res)
-        })
+		getUser(userInfoRef.current.sub).then((res) => {
+			setUser(res)
+		})
+        // const getUserWithID = getUser.bind(null, userInfoRef.current.sub as string)
+        // getUserWithID().then((res) => {
+        //     setUser(res)
+        // })
     }, [])
-    console.log(user)
 
 	// user?.lists.find((value, index, obj) => {
 	// 	value.id = activeList
@@ -111,9 +117,14 @@ export default function Home() {
 											<h3 className={style.list_data_item_title}>no tasks in this list</h3>
 										) : (
 											activeList.tasks.map((task, i) => {
-												task.index = i
-												console.log(task)
-												if (task.name.includes(taskSearchQuery) || taskSearchQuery == "") {
+												task.index = i + 1
+												console.log(task.completion)
+												// console.log(task)
+												// console.log("name check: ", (task.name.includes(taskSearch?.name ?? "") || taskSearch?.name == ""))
+												// console.log("index check: ", (task.index >= (taskSearch?.index[0] ?? 0) && task.index <= (taskSearch?.index[1] ?? 0)))
+												// console.log("importance check: ", (+task.severity >= (taskSearch?.severity[0] ?? 0) && +task.severity <= (taskSearch?.severity[1] ?? 0)))
+												// console.log("completion check: ", (+task.completion == taskSearch?.completion || taskSearch?.completion == 2))
+												if ((task.name.includes(taskSearch?.name ?? "") || taskSearch?.name == "") && (task.index >= (taskSearch?.index[0] ?? 0) && task.index <= (taskSearch?.index[1] ?? 0)) && (+task.severity >= (taskSearch?.severity[0] ?? 0) && +task.severity <= (taskSearch?.severity[1] ?? 0)) && (+task.completion == taskSearch?.completion || taskSearch?.completion == 2)) {
 													return (
 														<ListDataItem 
 															key={task.id} 
@@ -142,7 +153,7 @@ export default function Home() {
 							<>
 								{
 									activeTask == null ? (
-										<EditListAttributes list={activeList} search={setTaskSearchQuery}/>
+										<EditListAttributes list={activeList} filter={{ filterValue: taskSearch, setFilter: changeTaskSearch}}/>
 									) : (
 										<>
 											Need to create EditTaskAttributes component
