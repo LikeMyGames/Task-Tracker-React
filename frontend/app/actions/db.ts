@@ -62,13 +62,8 @@ export async function getUser(id: string): Promise<User> {
         [id]
     );
     const result = response.result[0].results[0] as User
-    // console.log("result id: ", result.id)
-    // result.lists = await getUserLists(id)
-    getUserLists(id).then((lists) => {
-        result.lists = lists
-    })
+    result.lists = await getUserLists(id)
     console.log(result)
-    // console.log("DB User result from ", id, ": ", result)
     return result
 }
 
@@ -78,16 +73,14 @@ export async function getUserLists(userID: string): Promise<List[]> {
         [userID]
     );
     const result = response.result[0].results as List[]
-    result.map(async list => {
-        list.tasks = [] as Task[]
-        getListTasks(list.id).then((tasks) => {
-            // console.log(tasks)
-            tasks.map(task => {
-                list.tasks.push(task)
-            })
-        })
-    })
-    // console.log("DB Lists result: ", result)
+    console.log(result)
+    for ( let i = 0; i<result.length; i++ ) {
+        result[i].tasks = [] as Task[]
+        console.log(result[i])
+        for ( const task of await getListTasks(result[i].id) ) {
+            result[i].tasks.push(task)
+        }
+    }
     return result
 }
 
@@ -98,6 +91,14 @@ export async function getListTasks(listID: string): Promise<Task[]> {
     );
     return response.result[0].results as Task[]
 }
+
+// export async function updateList(list: List): Promise<boolean> {
+//     const oldList = await getList(list.id)
+//     // const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+//     //     `SELECT * FROM Tasks WHERE owner_id = ?;`,
+//     //     [listID]
+//     // );
+// }
 
 // export async function updateUser(newUser: User): Promise<boolean> {
 //     if(typeof newUser.id !== "string") {throw new Error("User id is not valid")}
@@ -140,55 +141,38 @@ export async function getListTasks(listID: string): Promise<Task[]> {
 
 // async function getList(id: string): Promise<List> {
 //     if(typeof id !== "string") {throw new Error("List id is not valid")}
-
 //     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
 //         `SELECT * FROM Lists WHERE id = ?;`,
 //         [id]
 //     );
-
 //     const result = response.result[0].results[0];
-
 //     if(result == undefined) {throw new Error("List does not exist")}
-
 //     const taskIDs = JSON.parse(result.tasks)
 //     const tasks = [] as Task[]
 //     for (const id of taskIDs) {
 //         const task = await getTask(id.toString())
 //         tasks.push(task)
 //     }
-
 //     const list = {id: result.id, name: result.name, tasks: tasks} as List;
-
 //     return list;
-
 // }
 
-// export async function updateList(newList: List): Promise<boolean> {
-
+// export async function getNextListID() {
+//     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+//         `SELECT COUNT(*) AS rows FROM Lists;`
+//         ,[]
+//     )
+//     console.log(response)
 // }
-
-export async function getNextListID() {
-    const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
-        `SELECT COUNT(*) AS rows FROM Lists;`
-        ,[]
-    )
-    console.log(response)
-}
 
 // async function getTask(id: string): Promise<Task> {
 //     if(typeof id !== "string") {throw new Error("Task id is not valid")};
-
 //     const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
 //         `SELECT * FROM Tasks WHERE id = ?;`,
 //         [id]
 //     );
-
 //     const result = response.result[0].results[0];
-
 //     if(result == undefined) {throw new Error("Task does not exist")}
-
-//     console.log("Task query result: ", result)
-//     console.log("Task query result as Task: ", result as Task)
 //     return result as Task;
 // }
 

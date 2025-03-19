@@ -12,6 +12,7 @@ import { List, ListSearch } from "@/components/List"
 import { ListDataItem } from "./components/ListDataItem/ListDataItem"
 import { Task } from "@/components/Task"
 import { EditListAttributes } from "./components/EditAttributes/EditListAttributes"
+import { EditTaskAttributes } from "./components/EditAttributes/EditTaskAttributes"
 
 export default function Home() {
     const userInfoRef = useRef<UserInfo>(null);
@@ -34,8 +35,15 @@ export default function Home() {
 		}) as Task | null)
 	}
 
-	function changeTaskSearch(search: ListSearch) {
-		setTaskSearch(search)
+	// function changeTaskSearch(search: ListSearch) {
+	// 	setTaskSearch(search)
+	// }
+
+	function getUserData() {
+		getUser(userInfoRef.current?.sub as string ?? "").then((res) => {
+			setUser(res)
+			console.log(res)
+		})
 	}
 
 	// function handleTaskComplete(id: string) {
@@ -45,15 +53,10 @@ export default function Home() {
 
     useEffect(() => {
         userInfoRef.current = JSON.parse(localStorage.getItem("userInfo") ?? "") as UserInfo
-        // console.log(userInfoRef.current.sub)
-		getUser(userInfoRef.current.sub).then((res) => {
-			setUser(res)
-		})
-        // const getUserWithID = getUser.bind(null, userInfoRef.current.sub as string)
-        // getUserWithID().then((res) => {
-        //     setUser(res)
-        // })
-    }, [])
+		if ( user == null ) {
+			getUserData()
+		}
+    }, [user, setUser])
 
 	// user?.lists.find((value, index, obj) => {
 	// 	value.id = activeList
@@ -118,7 +121,7 @@ export default function Home() {
 										) : (
 											activeList.tasks.map((task, i) => {
 												task.index = i + 1
-												console.log(task.completion)
+												// console.log(task.completion)
 												// console.log(task)
 												// console.log("name check: ", (task.name.includes(taskSearch?.name ?? "") || taskSearch?.name == ""))
 												// console.log("index check: ", (task.index >= (taskSearch?.index[0] ?? 0) && task.index <= (taskSearch?.index[1] ?? 0)))
@@ -153,11 +156,21 @@ export default function Home() {
 							<>
 								{
 									activeTask == null ? (
-										<EditListAttributes list={activeList} filter={{ filterValue: taskSearch, setFilter: changeTaskSearch}}/>
+										<EditListAttributes
+											list={activeList}
+											filter={{
+												filterValue: taskSearch,
+												setFilter: setTaskSearch
+											}}
+											close={() => {
+												setActiveList(null)
+												// updateList(activeList)
+											}}
+											/>
 									) : (
-										<>
-											Need to create EditTaskAttributes component
-										</>
+										<EditTaskAttributes 
+											task={activeTask}
+										/>
 									)
 								}
 							</>

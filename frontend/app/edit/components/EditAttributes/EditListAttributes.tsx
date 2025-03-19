@@ -5,19 +5,16 @@ import Icon from "@/components/Basic Components/Icon";
 
 // const TaskSearchContext = createContext<{ filterValue: ListSearch; setFilter: (search: ListSearch) => void; } | null>(null)
 
-export function EditListAttributes({ list, filter }: { list: List; filter: { filterValue: ListSearch | null, setFilter: (value: ListSearch) => void; } }) {
+export function EditListAttributes({ list, filter, close }: { list: List; filter: { filterValue: ListSearch | null, setFilter: (value: ListSearch) => void; }, close: () => void }) {
     const newList = list;
-	console.log(filter.filterValue)
 	if ( filter.filterValue == null ) {
 		filter.setFilter({
 			name: "",
-			index: [1, list.tasks.length + 1] as number[],
-			severity: [1, 5] as number[],
+			index: [ 1, list.tasks.length ] as number[],
+			severity: [ 1, 5 ] as number[],
 			completion: 2 as number
 		} as ListSearch)
-		console.log(filter.filterValue)
 	}
-	console.log(filter.filterValue)
     return (
         <div className={style.edit_panel_replaceable}>
 			<div className={style.edit_panel_attributes}>
@@ -194,6 +191,7 @@ export function EditListAttributes({ list, filter }: { list: List; filter: { fil
 				<button type="button" className={`${style.edit_panel_close_button} special`} onClick={
                     (e) => {
                         e.preventDefault();
+						close()
                         // closeList()
                     }
                 }>

@@ -2,7 +2,6 @@ import style from "./ListDataItem.module.css"
 import { Task } from "@/components/Task"
 
 export function ListDataItem({ task, load, complete }: { task: Task; load: (id: string) => void; complete?: (id: string) => void; }) {
-    console.log()
     return (
         <>
             <button type="button" id={`task-${task.name}`} className={style.list_data_item} onClick={(e) => {
