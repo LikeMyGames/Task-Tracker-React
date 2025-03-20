@@ -4,7 +4,7 @@ export interface Task {
 	name: string;
 	index: number;
 	severity: string;
-	completion: boolean;
+	completion: number;
 	note: string | null;
 	dueDate: string;
 	dueTime: number;

@@ -10,7 +10,7 @@ export function EditTaskAttributes({ task }: { task: Task }) {
 		    		<h3 className={style.edit_panel_title}>Task Settings:</h3>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Name:</h3>
-		    			<input name="task_name_input" type="text" className={style.edit_panel_item_value} placeholder="Task Name" value="${currentTask.name}" onChange="taskNameChanged()" autocomplete="off" spellcheck="false" />
+		    			<input name="task_name_input" type="text" className={style.edit_panel_item_value} placeholder="Task Name" defaultValue={task.name} onChange="taskNameChanged()" autocomplete="off" spellcheck="false" />
 		    		</div>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Importance:</h3>
@@ -27,11 +27,13 @@ export function EditTaskAttributes({ task }: { task: Task }) {
 		    		</div>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Completed?:</h3>
-		    			<button name={style.task_completionStatus_checkbox} type="button" className="edit_panel_item_value" onClick={(e) => {
+		    			<button name={style.task_completionStatus_checkbox} type="button" className={style.edit_panel_item_value} onClick={(e) => {
                             e.preventDefault();
                             // taskCompletionChanged()
+							console.log(+task.completion)
+							task.completion = +task.completion == 1 ? 0 : 1
                         }}>
-		    				<Icon>{task.completion ? "check" : "close"}</Icon>
+		    				<Icon>{task.completion == 1 ? "check" : "close"}</Icon>
 		    			</button>
 		    		</div>
 		    		<div className={style.edit_panel_item}>
@@ -62,7 +64,7 @@ export function EditTaskAttributes({ task }: { task: Task }) {
 		    			</h3>
 		    		</button>
 		    	</div>
-		    	<div className="edit_panel_close">
+		    	<div className={style.edit_panel_close}>
 		    		<button type="button" className={`${style.edit_panel_close_button} ${style.edit_panel_close_button_single} error`} onClick="deleteTask()">
 		    			<span className="material-symbols-rounded">
 		    				delete
