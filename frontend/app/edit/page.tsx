@@ -26,6 +26,7 @@ export default function Home() {
 	function changeActiveList(list: List | null) {
 		setActiveTask(null)
 		setActiveList(list)
+		setActiveListID(list?.id as string | null)
 	}
 
 	// function changeActiveTask(task: Task | null) {
@@ -48,9 +49,9 @@ export default function Home() {
 	// 	}) as Task | null)
 	// }
 
-	// function changeTaskSearch(search: ListSearch) {
-	// 	setTaskSearch(search)
-	// }
+	function changeTaskSearch(search: ListSearch) {
+		setTaskSearch(search)
+	}
 
 	function getUserData() {
 		getUser(userInfoRef.current?.sub as string ?? "").then((res) => {
@@ -90,7 +91,11 @@ export default function Home() {
 							) : (
 								<>
 									{user?.lists.map((list) => {
-										return <ListOption id={list.id} key={list.id} name={list.name} action={changeActiveListByID}/>
+										return <ListOption id={list.id} key={list.id} name={list.name} action={(id: string) => {
+											if (id != activeListID) {
+												changeActiveListByID(id)
+											}
+										}}/>
 									})}
 								</>
 							)
@@ -146,8 +151,10 @@ export default function Home() {
 															key={task.id} 
 															task={task} 
 															load={(task) => {
-																setActiveTask(task)
-																setActiveTaskID(task.id)
+																// if (activeTaskID != task.id) {
+																	setActiveTask(task)
+																	setActiveTaskID(task.id)
+																// }
 															}}
 														/>
 													)
@@ -175,7 +182,7 @@ export default function Home() {
 											list={activeList}
 											filter={{
 												filterValue: taskSearch,
-												setFilter: setTaskSearch
+												setFilter: changeTaskSearch
 											}}
 											create={() => {
 												getNextTaskID()
@@ -201,27 +208,10 @@ export default function Home() {
 														tasks: tasks
 													} as List)
 												})
-												// activeList.tasks.find((v, i) => {
-												// 	if( v.id == task.id ) {
-												// 		setActiveList({
-												// 			...activeList,
-												// 			tasks: [ ...activeList.tasks, task] as Task[]
-												// 		} as List)
-												// 		activeList.tasks[i] = task
-												// 	}
-												// })
-												// getListTasks(activeList.id).then((tasks) => {
-												// 	console.log(tasks)
-												// 	setActiveList({
-												// 		...activeList,
-												// 		tasks: tasks 
-												// 	} as List)
-												// 	setActiveTask(null)
-												// 	console.log("saving task:", task)
-												// })
 											}}
 											close={() => {
 												setActiveTask(null)
+												console.log(activeTask)
 											}}
 											remove={(id: string) => {
 												setActiveList({

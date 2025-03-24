@@ -6,8 +6,16 @@ import Icon from "@/components/Basic Components/Icon";
 import { useState } from "react"
 
 export function EditTaskAttributes({ task, save, close, remove }: { task: Task; save: (newTask: Task) => void; close: () => void; remove: (id: string) => void; }) {
-	const [newTask, setNewTask] = useState<Task>(task)
-	// const taskRef = useRef<Task>(task)
+	const [newTask, setNewTask] = useState<Task | null>(task)
+	if (newTask?.id != task.id) {
+		console.log("re-rendering task attribute edit")
+		// console.log("before - task: ", task)
+		// console.log("before - newTask?: ", newTask)
+		setNewTask(task)
+		// console.log("after - task: ", task)
+		// console.log("after - newTask?: ", newTask)
+	}
+	console.log(newTask)
     // const [ task, setTask ] = useState<Task>(oldTask)
     return (
         <>
@@ -19,9 +27,9 @@ export function EditTaskAttributes({ task, save, close, remove }: { task: Task; 
 		    			<input
                             name="task_name_input"
                             type="text"
-                            className={`${style.edit_panel_item_value} ${newTask.name != task.name ? style.edit_panel_item_value_changed : ""}`}
+                            className={`${style.edit_panel_item_value} ${newTask?.name != task.name ? style.edit_panel_item_value_changed : ""}`}
                             placeholder="Task Name"
-                            defaultValue={newTask.name}
+                            defaultValue={newTask?.name}
                             onChange={(e) => {
                                 e.preventDefault();
 								setNewTask({
@@ -35,7 +43,7 @@ export function EditTaskAttributes({ task, save, close, remove }: { task: Task; 
 		    		</div>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Importance:</h3>
-		    			<select title="task_importance_selector" className={`${style.edit_panel_item_value} ${newTask.severity != task.severity ? style.edit_panel_item_value_changed : ""}`} defaultValue={newTask.severity} onChange={(e) => {
+		    			<select title="task_importance_selector" className={`${style.edit_panel_item_value} ${newTask?.severity != task.severity ? style.edit_panel_item_value_changed : ""}`} defaultValue={newTask?.severity} onChange={(e) => {
                             e.preventDefault();
 							setNewTask({
 								...newTask,
@@ -51,23 +59,23 @@ export function EditTaskAttributes({ task, save, close, remove }: { task: Task; 
 		    		</div>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Completed?:</h3>
-		    			<button title={"task_completionStatus_checkbox"} type="button" className={`${style.edit_panel_item_value} ${newTask.completion != task.completion ? style.edit_panel_item_value_changed : ""}`} onClick={(e) => {
+		    			<button title={"task_completionStatus_checkbox"} type="button" className={`${style.edit_panel_item_value} ${newTask?.completion != task.completion ? style.edit_panel_item_value_changed : ""}`} onClick={(e) => {
                             e.preventDefault();
                             // taskCompletionChanged()
 							setNewTask({
 								...newTask,
-								completion: newTask.completion == 1 ? 0 : 1
+								completion: newTask?.completion == 1 ? 0 : 1
 							} as Task)
                         }}>
                             {/* {
-                                newTask.completion == 1 ? (
+                                newTask?.completion == 1 ? (
                                     <Icon iconName={"check"} />
                                 ) : (
                                     <Icon iconName={"close"} />
                                 )
                             } */}
 							{
-								newTask.completion == 1 ? (
+								newTask?.completion == 1 ? (
 									<Icon iconName={"check"} />
 								) : (
 									<Icon iconName={"close"} />
@@ -81,7 +89,7 @@ export function EditTaskAttributes({ task, save, close, remove }: { task: Task; 
                             e.preventDefault();
                             // taskNotesChanged()
                         }}>
-                            {newTask.note}
+                            {newTask?.note}
                         </textarea>
 		    		</div>
 		    	</div>
@@ -89,7 +97,7 @@ export function EditTaskAttributes({ task, save, close, remove }: { task: Task; 
 		    		<button type="button" className={`${style.edit_panel_close_button} special`} onClick={(e) => {
                         e.preventDefault();
                         // savecloseTaskEdit(event)
-                        save(newTask)
+                        save(newTask ?? {} as Task)
                     }}>
 		    			<span className="material-symbols-rounded">
 		    				save
@@ -101,6 +109,7 @@ export function EditTaskAttributes({ task, save, close, remove }: { task: Task; 
 		    		<button type="button" className={`${style.edit_panel_close_button} special`} onClick={(e) => {
                         e.preventDefault();
                         // closeTaskEdit()
+						setNewTask(null)
                         close()
                     }}>
 		    			<span className="material-symbols-rounded">
@@ -115,7 +124,7 @@ export function EditTaskAttributes({ task, save, close, remove }: { task: Task; 
 		    		<button type="button" className={`${style.edit_panel_close_button} ${style.edit_panel_close_button_single} error`} onClick={(e) => {
                         e.preventDefault();
                         // deleteTask()
-                        remove(newTask.id);
+                        remove(newTask?.id ?? "");
                     }}>
 		    			<span className="material-symbols-rounded">
 		    				delete
