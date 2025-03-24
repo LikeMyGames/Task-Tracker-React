@@ -152,7 +152,7 @@ button.edit_panel_item_value_changed > span {
 }
 
 button.edit_panel_item_value_changed:hover > span{
-	color: var(--primary-color);
+	color: var(--accent-color);
 }
 
 select.edit_panel_item_value {

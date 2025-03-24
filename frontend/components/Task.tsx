@@ -1,11 +1,11 @@
 export interface Task {
 	id: string;
-	owner_id?: string;
+	owner_id: string;
 	name: string;
-	index: number;
-	severity: string;
+	task_index: number;
+	severity: number;
 	completion: number;
-	note: string | null;
+	note: string;
 	dueDate: string;
 	dueTime: number;
 	repetition: string;

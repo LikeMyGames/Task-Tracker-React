@@ -1,8 +1,14 @@
+'use client'
+
 import { Task } from "@/components/Task"
 import style from "./EditAttributes.module.css"
 import Icon from "@/components/Basic Components/Icon";
+import { useState } from "react"
 
-export function EditTaskAttributes({ task }: { task: Task }) {
+export function EditTaskAttributes({ task, save, close, remove }: { task: Task; save: (newTask: Task) => void; close: () => void; remove: (id: string) => void; }) {
+	const [newTask, setNewTask] = useState<Task>(task)
+	// const taskRef = useRef<Task>(task)
+    // const [ task, setTask ] = useState<Task>(oldTask)
     return (
         <>
             <div className={style.edit_panel_replaceable}>
@@ -10,13 +16,31 @@ export function EditTaskAttributes({ task }: { task: Task }) {
 		    		<h3 className={style.edit_panel_title}>Task Settings:</h3>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Name:</h3>
-		    			<input name="task_name_input" type="text" className={style.edit_panel_item_value} placeholder="Task Name" defaultValue={task.name} onChange="taskNameChanged()" autocomplete="off" spellcheck="false" />
+		    			<input
+                            name="task_name_input"
+                            type="text"
+                            className={`${style.edit_panel_item_value} ${newTask.name != task.name ? style.edit_panel_item_value_changed : ""}`}
+                            placeholder="Task Name"
+                            defaultValue={newTask.name}
+                            onChange={(e) => {
+                                e.preventDefault();
+								setNewTask({
+									...newTask,
+									name: e.target.value
+								} as Task)
+                            }}
+                            autoComplete="off"
+                            spellCheck="false"
+						/>
 		    		</div>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Importance:</h3>
-		    			<select title="task_importance_selector" className={style.edit_panel_item_value} defaultValue={task.severity} onChange={(e) => {
+		    			<select title="task_importance_selector" className={`${style.edit_panel_item_value} ${newTask.severity != task.severity ? style.edit_panel_item_value_changed : ""}`} defaultValue={newTask.severity} onChange={(e) => {
                             e.preventDefault();
-                            task.severity = e.target.value;
+							setNewTask({
+								...newTask,
+								severity: +e.target.value
+							} as Task)
                         }}>
 		    				<option value="1">Very low</option>
 		    				<option value="2">Low</option>
@@ -27,13 +51,28 @@ export function EditTaskAttributes({ task }: { task: Task }) {
 		    		</div>
 		    		<div className={style.edit_panel_item}>
 		    			<h3 className={style.edit_panel_item_title}>Task Completed?:</h3>
-		    			<button name={style.task_completionStatus_checkbox} type="button" className={style.edit_panel_item_value} onClick={(e) => {
+		    			<button title={"task_completionStatus_checkbox"} type="button" className={`${style.edit_panel_item_value} ${newTask.completion != task.completion ? style.edit_panel_item_value_changed : ""}`} onClick={(e) => {
                             e.preventDefault();
                             // taskCompletionChanged()
-							console.log(+task.completion)
-							task.completion = +task.completion == 1 ? 0 : 1
+							setNewTask({
+								...newTask,
+								completion: newTask.completion == 1 ? 0 : 1
+							} as Task)
                         }}>
-		    				<Icon>{task.completion == 1 ? "check" : "close"}</Icon>
+                            {/* {
+                                newTask.completion == 1 ? (
+                                    <Icon iconName={"check"} />
+                                ) : (
+                                    <Icon iconName={"close"} />
+                                )
+                            } */}
+							{
+								newTask.completion == 1 ? (
+									<Icon iconName={"check"} />
+								) : (
+									<Icon iconName={"close"} />
+								)
+							}
 		    			</button>
 		    		</div>
 		    		<div className={style.edit_panel_item}>
@@ -42,12 +81,16 @@ export function EditTaskAttributes({ task }: { task: Task }) {
                             e.preventDefault();
                             // taskNotesChanged()
                         }}>
-                            {task.note}
+                            {newTask.note}
                         </textarea>
 		    		</div>
 		    	</div>
 		    	<div className={style.edit_panel_close}>
-		    		<button type="button" className={`${style.edit_panel_close_button} special`} onClick="savecloseTaskEdit(event)">
+		    		<button type="button" className={`${style.edit_panel_close_button} special`} onClick={(e) => {
+                        e.preventDefault();
+                        // savecloseTaskEdit(event)
+                        save(newTask)
+                    }}>
 		    			<span className="material-symbols-rounded">
 		    				save
 		    			</span>
@@ -55,7 +98,11 @@ export function EditTaskAttributes({ task }: { task: Task }) {
 		    				Save
 		    			</h3>
 		    		</button>
-		    		<button type="button" className={`${style.edit_panel_close_button} special`} onClick="closeTaskEdit()">
+		    		<button type="button" className={`${style.edit_panel_close_button} special`} onClick={(e) => {
+                        e.preventDefault();
+                        // closeTaskEdit()
+                        close()
+                    }}>
 		    			<span className="material-symbols-rounded">
 		    				cancel
 		    			</span>
@@ -65,7 +112,11 @@ export function EditTaskAttributes({ task }: { task: Task }) {
 		    		</button>
 		    	</div>
 		    	<div className={style.edit_panel_close}>
-		    		<button type="button" className={`${style.edit_panel_close_button} ${style.edit_panel_close_button_single} error`} onClick="deleteTask()">
+		    		<button type="button" className={`${style.edit_panel_close_button} ${style.edit_panel_close_button_single} error`} onClick={(e) => {
+                        e.preventDefault();
+                        // deleteTask()
+                        remove(newTask.id);
+                    }}>
 		    			<span className="material-symbols-rounded">
 		    				delete
 		    			</span>

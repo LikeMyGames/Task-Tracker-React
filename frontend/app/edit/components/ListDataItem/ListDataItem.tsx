@@ -1,13 +1,13 @@
 import style from "./ListDataItem.module.css"
 import { Task } from "@/components/Task"
 
-export function ListDataItem({ task, load, complete }: { task: Task; load: (id: string) => void; complete?: (id: string) => void; }) {
+export function ListDataItem({ task, load }: { task: Task; load: (task: Task) => void; }) {
     return (
         <>
             <button type="button" id={`task-${task.name}`} className={style.list_data_item} onClick={(e) => {
                 e.preventDefault();
-                // loadTask("task-${name}")
-				load(task.id)
+				console.log("loading task with id: ", task.id)
+				load(task)
             }}>
 		    	<h3 className={style.list_data_item_title}>
 		    		{task.name}
@@ -15,11 +15,13 @@ export function ListDataItem({ task, load, complete }: { task: Task; load: (id: 
 		    	<ul className={style.list_data_item_attributes}>
 		    		<li className={style.list_data_item_attribute}>
 		    			<p>Task #:</p>
-		    			<p className={style.list_data_item_task_num}>{task.index}</p>
+		    			<p className={style.list_data_item_task_num}>{task.task_index}</p>
 		    		</li>
 		    		<li className={style.list_data_item_attribute}>
 		    			<p>Importance:</p>
-		    			<p className={style.list_data_item_severity}>{task.severity}</p>
+		    			<p className={style.list_data_item_severity}>{
+							task.severity == 1 ? "Very Low" : task.severity == 2 ? "Low" : task.severity == 3 ? "Medium" : task.severity == 4 ? "High" : "Very High"
+						}</p>
 		    		</li>
 		    		<li className={style.list_data_item_attribute}>
 		    			<p>Completed?:</p>

@@ -5,7 +5,7 @@ export interface User {
     // password: string;
     id: string;
     lists: List[];
-    settings: string;
+    settings: unknown;
 }
 
 export interface AppSettings {

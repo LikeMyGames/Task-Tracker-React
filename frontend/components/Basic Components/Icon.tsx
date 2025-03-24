@@ -1,13 +1,17 @@
+// "use client"
 
-
-const Button: React.FC<{ children?: React.ReactNode; className?: string; }> = ({ children, className }) => {
+const Button: React.FC<{ children?: React.ReactNode; className?: string; iconName?: string }> = ({ children, className, iconName }) => {
     return (
         <>
             {
-                children && (
-                <span className={`material-symbols-rounded ${className}`}>
-                    {children}
-                </span> 
+                children == null ? (
+                    <span className={`material-symbols-rounded ${className}`}>
+                        {iconName}
+                    </span> 
+                ) : (
+                    <span className={`material-symbols-rounded ${className}`}>
+                        {children}
+                    </span> 
                 )
             }
         </>

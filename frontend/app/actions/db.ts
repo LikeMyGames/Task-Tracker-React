@@ -63,7 +63,8 @@ export async function getUser(id: string): Promise<User> {
     );
     const result = response.result[0].results[0] as User
     result.lists = await getUserLists(id)
-    console.log(result)
+    result.settings = JSON.parse(result.settings as string)
+    // console.log(result)
     return result
 }
 
@@ -73,10 +74,8 @@ export async function getUserLists(userID: string): Promise<List[]> {
         [userID]
     );
     const result = response.result[0].results as List[]
-    console.log(result)
     for ( let i = 0; i<result.length; i++ ) {
         result[i].tasks = [] as Task[]
-        console.log(result[i])
         for ( const task of await getListTasks(result[i].id) ) {
             result[i].tasks.push(task)
         }
@@ -89,7 +88,42 @@ export async function getListTasks(listID: string): Promise<Task[]> {
         `SELECT * FROM Tasks WHERE owner_id = ?;`,
         [listID]
     );
+    console.log(response.result[0].results as Task[])
     return response.result[0].results as Task[]
+}
+
+export async function saveTask(task: Task): Promise<Task> {
+    await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+        `UPDATE Tasks SET name = ?, task_index = ?, severity = ?, completion = ?, note = ?, dueDate = ?, dueTime = ?, repetition = ? WHERE id = ?;`,
+        [task.name, task.task_index, task.severity, task.completion, task.note, task.dueDate, task.dueTime, task.repetition, task.id]
+    );
+	const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+        `SELECT * FROM Tasks WHERE id = ?`,
+        [task.id]
+    );
+    console.log(response.result[0].results)
+    return response.result[0].results[0] as Task
+}
+
+export async function createTask(task: Task): Promise<Task> {
+	await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+        `INSERT INTO Tasks (id, name, task_index, severity, completion, note, dueDate, dueTime, repetition, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,? , ?)`,
+        [task.id, task.name, task.task_index, task.severity, task.completion, task.note, task.dueDate, task.dueTime, task.repetition, task.owner_id]
+    );
+	const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+        `SELECT * FROM Tasks WHERE id = ?`,
+        [task.id]
+    );
+	console.log(response.result[0].results[0] as Task)
+	return response.result[0].results[0] as Task
+}
+
+export async function getNextTaskID() {
+	const response = await d1.query(process.env['CLOUDFLARE_DB_UUID'] ?? "",
+        `SELECT COUNT(id) FROM Tasks`
+    );
+	console.log("Next Task ID: ", response.result[0].results[0]["COUNT(id)"])
+	return response.result[0].results[0]["COUNT(id)"] as string;
 }
 
 // export async function updateList(list: List): Promise<boolean> {

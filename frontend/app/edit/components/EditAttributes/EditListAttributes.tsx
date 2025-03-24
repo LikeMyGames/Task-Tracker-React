@@ -5,7 +5,7 @@ import Icon from "@/components/Basic Components/Icon";
 
 // const TaskSearchContext = createContext<{ filterValue: ListSearch; setFilter: (search: ListSearch) => void; } | null>(null)
 
-export function EditListAttributes({ list, filter, close }: { list: List; filter: { filterValue: ListSearch | null, setFilter: (value: ListSearch) => void; }, close: () => void }) {
+export function EditListAttributes({ list, filter, create, close }: { list: List; filter: { filterValue: ListSearch | null, setFilter: (value: ListSearch) => void; }, create: () => void; close: () => void }) {
     const newList = list;
 	if ( filter.filterValue == null ) {
 		filter.setFilter({
@@ -30,7 +30,7 @@ export function EditListAttributes({ list, filter, close }: { list: List; filter
 					}/>
 				</div>
 			</div>
-			<div className={style.edit_panel_attributes}>
+			{/* <div className={style.edit_panel_attributes}>
 				<h3 className={style.edit_panel_title}>Display Options:</h3>
 				<div className={style.edit_panel_item}>
 					<h3 className={style.edit_panel_item_title}>Search Tasks:</h3>
@@ -47,27 +47,24 @@ export function EditListAttributes({ list, filter, close }: { list: List; filter
 						}
 					} />
 				</div>
-				{/* <div className={style.edit_panel_item}>
-					<h3 className={style.edit_panel_item_title}>Sort By:</h3>
-					<select className={style.edit_panel_item_value} title="task_importance_selector" onChange={
-                        (e) => {
-                            e.preventDefault();
-                            // sortAttributeChange()
-                        }
-                    }>
-						<option value="1">{'Name: (A => Z)'}</option>
-						<option value="2">{'Name: (Z => A)'}</option>
-						<option value="3">{'Task #: (Low => High)'}</option>
-						<option value="4">{'Task #: (High => Low)'}</option>
-						<option value="5">{'Importance: (Very Low => Very High)'}</option>
-						<option value="6">{'Importance: (Very High => Very Low)'}</option>
-						<option value="7">{'Completion: (True => False)'}</option>
-						<option value="8">{'Completion: (False => True)'}</option>
-					</select>
-				</div> */}
-			</div>
+			</div> */}
 			<div className={style.edit_panel_attributes}>
 				<h3 className={style.edit_panel_title}>Filter By:</h3>
+				<div className={style.edit_panel_item}>
+					<h3 className={style.edit_panel_item_title}>Search Tasks:</h3>
+					<input type="search" className={style.edit_panel_item_value} placeholder="Task Name" title="task_search_input" onChange={
+						(e) => {
+							e.preventDefault();
+							console.log("Searching for task: ", e.target.value);
+							filter.setFilter({
+								name: e.target.value,
+								index: filter.filterValue?.index,
+								severity: filter.filterValue?.severity,
+								completion: filter.filterValue?.completion
+							} as ListSearch)
+						}
+					} />
+				</div>
 				<div className={style.edit_panel_item}>
 					<h3 className={style.edit_panel_item_title}>{'Range of Task #\'s:'}</h3>
 					<div className={style.edit_panel_item_range}>
@@ -77,7 +74,7 @@ export function EditListAttributes({ list, filter, close }: { list: List; filter
                                 // listFilter('tasknum')
 								filter.setFilter({
 									name: filter.filterValue?.name,
-									index: [ e.target.value, filter.filterValue?.index[1] ] as number[],
+									index: [ e.target.value , filter.filterValue?.index[1] ] as number[],
 									severity: filter.filterValue?.severity,
 									completion: filter.filterValue?.completion
 								} as ListSearch)
@@ -178,6 +175,7 @@ export function EditListAttributes({ list, filter, close }: { list: List; filter
                     (e) => {
                         e.preventDefault();
                         // createTask()
+						create()
                     }
                 }>
                     <Icon>add_circle</Icon>

@@ -46,6 +46,16 @@
 	}
 }
 
+::-moz-selection {
+  color: var(--secondary-color);
+  background: var(--accent-color);
+}
+
+::selection {
+  color: var(--secondary-color);
+  background: var(--accent-color);
+}
+
 html, body {
   width: 100vw;
   height: 100vh;
