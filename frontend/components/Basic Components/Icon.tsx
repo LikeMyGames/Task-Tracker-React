@@ -5,13 +5,13 @@ const Button: React.FC<{ children?: React.ReactNode; className?: string; iconNam
         <>
             {
                 children == null ? (
-                    <span className={`material-symbols-rounded ${className}`}>
+                    <span className={`material-symbols-rounded ${className ?? ""}`}>
                         {iconName}
-                    </span> 
+                    </span>
                 ) : (
-                    <span className={`material-symbols-rounded ${className}`}>
+                    <span className={`material-symbols-rounded ${className ?? ""}`}>
                         {children}
-                    </span> 
+                    </span>
                 )
             }
         </>

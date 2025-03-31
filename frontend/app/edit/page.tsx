@@ -13,28 +13,29 @@ import { ListDataItem } from "./components/ListDataItem/ListDataItem"
 import { Task } from "@/components/Task"
 import { EditListAttributes } from "./components/EditAttributes/EditListAttributes"
 import { EditTaskAttributes } from "./components/EditAttributes/EditTaskAttributes"
+import { CreateTask } from "./components/CreateTask/CreateTask"
 
 export default function Home() {
-    const userInfoRef = useRef<UserInfo>(null);
-    const [ user, setUser ] = useState<User | null>(null)
-	const [ activeListID, setActiveListID ] = useState<string | null>(null)
-	const [ activeList, setActiveList ] = useState<List | null>(null)
-	const [ activeTaskID, setActiveTaskID ] = useState<string | null>(null)
-	const [ activeTask, setActiveTask ] = useState<Task | null>(null)
-	const [ taskSearch, setTaskSearch ] = useState<ListSearch | null>(null)
+	const userInfoRef = useRef<UserInfo>(null);
+	const [user, setUser] = useState<User | null>(null)
+	const [activeListID, setActiveListID] = useState<string | null>(null)
+	const [activeList, setActiveList] = useState<List | null>(null)
+	const [activeTaskID, setActiveTaskID] = useState<string | null>(null)
+	const [activeTask, setActiveTask] = useState<Task | null>(null)
+	const [taskSearch, setTaskSearch] = useState<ListSearch | null>(null)
 
 	function changeActiveList(list: List | null) {
 		setActiveTask(null)
+		setActiveTaskID(null)
 		setActiveList(list)
-		setActiveListID(list?.id as string | null)
 	}
 
 	// function changeActiveTask(task: Task | null) {
 	// 	console.log("new task: ", task)
 	// 	setActiveTask(task)
 	// }
-    
-    function changeActiveListByID(id: string) {
+
+	function changeActiveListByID(id: string) {
 		setActiveTask(null)
 		setActiveListID(id)
 		setActiveList(user?.lists.find(list => {
@@ -49,9 +50,9 @@ export default function Home() {
 	// 	}) as Task | null)
 	// }
 
-	function changeTaskSearch(search: ListSearch) {
-		setTaskSearch(search)
-	}
+	// function changeTaskSearch(search: ListSearch) {
+	// 	setTaskSearch(search)
+	// }
 
 	function getUserData() {
 		getUser(userInfoRef.current?.sub as string ?? "").then((res) => {
@@ -65,21 +66,21 @@ export default function Home() {
 	// 	console.log("completing task with id: ", id)
 	// }
 
-    useEffect(() => {
-        userInfoRef.current = JSON.parse(localStorage.getItem("userInfo") ?? "") as UserInfo
-		if ( user == null ) {
+	useEffect(() => {
+		userInfoRef.current = JSON.parse(localStorage.getItem("userInfo") ?? "") as UserInfo
+		if (user == null) {
 			getUserData()
 		}
-    }, [user, setUser])
+	}, [user, setUser])
 
 	// user?.lists.find((value, index, obj) => {
 	// 	value.id = activeList
 	// 	return 
 	// })
-    
-    return (
-        <>
-            <div className={style.main}>
+
+	return (
+		<>
+			{/* <div className={style.main}>
                 <div className={style.list_menu}>
 	        		<h2 className={style.list_menu_title}>
 	        			Lists
@@ -91,11 +92,7 @@ export default function Home() {
 							) : (
 								<>
 									{user?.lists.map((list) => {
-										return <ListOption id={list.id} key={list.id} name={list.name} action={(id: string) => {
-											if (id != activeListID) {
-												changeActiveListByID(id)
-											}
-										}}/>
+										return <ListOption id={list.id} key={list.id} name={list.name} action={changeActiveListByID}/>
 									})}
 								</>
 							)
@@ -139,22 +136,16 @@ export default function Home() {
 										) : (
 											activeList.tasks.map((task, i) => {
 												task.task_index = i+1;
-												// console.log(task.completion)
-												// console.log(task)
-												// console.log("name check: ", (task.name.includes(taskSearch?.name ?? "") || taskSearch?.name == ""))
-												// console.log("index check: ", (task.index >= (taskSearch?.index[0] ?? 0) && task.index <= (taskSearch?.index[1] ?? 0)))
-												// console.log("importance check: ", (+task.severity >= (taskSearch?.severity[0] ?? 0) && +task.severity <= (taskSearch?.severity[1] ?? 0)))
-												// console.log("completion check: ", (+task.completion == taskSearch?.completion || taskSearch?.completion == 2))
 												if ((task.name.includes(taskSearch?.name ?? "") || taskSearch?.name == "") && (task.task_index >= (taskSearch?.index[0] ?? 0) && task.task_index <= (taskSearch?.index[1] ?? 0)) && (+task.severity >= (taskSearch?.severity[0] ?? 0) && +task.severity <= (taskSearch?.severity[1] ?? 0)) && (+task.completion == taskSearch?.completion || taskSearch?.completion == 2)) {
 													return (
 														<ListDataItem 
 															key={task.id} 
 															task={task} 
 															load={(task) => {
-																// if (activeTaskID != task.id) {
+																if(task.id != activeTaskID) {
 																	setActiveTask(task)
 																	setActiveTaskID(task.id)
-																// }
+																}
 															}}
 														/>
 													)
@@ -182,7 +173,7 @@ export default function Home() {
 											list={activeList}
 											filter={{
 												filterValue: taskSearch,
-												setFilter: changeTaskSearch
+												setFilter: setTaskSearch
 											}}
 											create={() => {
 												getNextTaskID()
@@ -194,8 +185,9 @@ export default function Home() {
 										/>
 									) : (
 										<EditTaskAttributes 
+											key={activeTask?.id}
 											task={activeTask}
-											save={(task) => {
+											save={(task: Task) => {
 												setActiveTask(null)
 												saveTask(task).then((savedTask) => {
 													const index = activeList.tasks.findIndex((value: Task) => {
@@ -208,10 +200,27 @@ export default function Home() {
 														tasks: tasks
 													} as List)
 												})
+												// activeList.tasks.find((v, i) => {
+												// 	if( v.id == task.id ) {
+												// 		setActiveList({
+												// 			...activeList,
+												// 			tasks: [ ...activeList.tasks, task] as Task[]
+												// 		} as List)
+												// 		activeList.tasks[i] = task
+												// 	}
+												// })
+												// getListTasks(activeList.id).then((tasks) => {
+												// 	console.log(tasks)
+												// 	setActiveList({
+												// 		...activeList,
+												// 		tasks: tasks 
+												// 	} as List)
+												// 	setActiveTask(null)
+												// 	console.log("saving task:", task)
+												// })
 											}}
 											close={() => {
 												setActiveTask(null)
-												console.log(activeTask)
 											}}
 											remove={(id: string) => {
 												setActiveList({
@@ -230,7 +239,10 @@ export default function Home() {
 					}
                 </div>
             </div>
-	        <div className={style.drag_region}></div>
-        </>
-    )
+	        <div className={style.drag_region}></div> */}
+			<CreateTask list={undefined} close={(): void => {
+				throw new Error("Function not implemented.")
+			}} />
+		</>
+	)
 }

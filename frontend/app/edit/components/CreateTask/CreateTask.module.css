@@ -1,0 +1,139 @@
+.create {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.create_panel {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    background-color: var(--secondary-color);
+    padding: 50px;
+    border-radius: 50px;
+    max-width: 50vw;
+}
+
+.create_panel_title {
+    color: var(--text-color);
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.create_subpanel {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    padding: 5px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    max-height: 500px;
+    max-width: 100%;
+}
+
+.minSize {
+    width: min-content;
+    height: min-content;
+}
+
+.create_subpanel:last-child {
+    margin-bottom: 0px;
+}
+
+.h {
+    flex-direction: row;
+}
+
+.v {
+    flex-direction: column;
+}
+
+.create_subpanel_item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 25px;
+    height: 50px;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: var(--secondary-color);
+}
+
+.create_subpanel_item:last-child {
+    margin-bottom: 0px;
+}
+
+.create_subpanel_subitem {
+    border-radius: 20px;
+    width: 100%;
+    background-color: var(--primary-color);
+    height: 100%;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.create_subpanel_subitem:last-child {
+    margin-right: 0px;
+}
+
+.create_subpanel_subitem:hover {
+    filter: none;
+    transform: none;
+}
+
+.create_subpanel_item_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    font-size: 30px;
+    width: 30px;
+    transition: 125ms;
+    color: var(--text-color)
+}
+
+.create_subpanel_item_icon:hover {
+    margin: 0px;
+    padding: 0px;
+    font-size: 32px;
+    color: var(--accent-color)
+}
+
+.create_subpanel_button {
+    padding: 0px;
+    border: none;
+    border-radius: 25px;
+    margin-right: 5px;
+    width: 200px;
+    background-color: var(--secondary-color);
+}
+
+.create_subpanel_button_selected {
+    background-color: var(--accent-color);
+}
+
+.create_subpanel_button_selected:hover {
+    filter: drop-shadow(0.2604vw 0.2604vw var(--secondary-color));
+}
+
+.create_subpanel_button:last-child {
+    margin-right: 0px;
+}
+
+.create_subpanel_button>h4 {
+    margin: 0px;
+    padding: 10px;
+    color: var(--text-color);
+}
+
+.create_subpanel_button_selected>h4 {
+    color: var(--primary-color);
+}

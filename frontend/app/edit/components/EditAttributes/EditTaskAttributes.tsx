@@ -7,16 +7,6 @@ import { useState } from "react"
 
 export function EditTaskAttributes({ task, save, close, remove }: { task: Task; save: (newTask: Task) => void; close: () => void; remove: (id: string) => void; }) {
 	const [newTask, setNewTask] = useState<Task | null>(task)
-	if (newTask?.id != task.id) {
-		console.log("re-rendering task attribute edit")
-		// console.log("before - task: ", task)
-		// console.log("before - newTask?: ", newTask)
-		setNewTask(task)
-		// console.log("after - task: ", task)
-		// console.log("after - newTask?: ", newTask)
-	}
-	console.log(newTask)
-    // const [ task, setTask ] = useState<Task>(oldTask)
     return (
         <>
             <div className={style.edit_panel_replaceable}>
