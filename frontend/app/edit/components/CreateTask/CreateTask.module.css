@@ -1,139 +1,187 @@
 .create {
-    display: flex;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--background-color);
 }
 
 .create_panel {
+    width: 50vw;
+    min-height: 500px;
+    max-height: 750px;
     display: flex;
-    justify-content: center;
-    /* align-items: center; */
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-direction: column;
-    background-color: var(--secondary-color);
-    padding: 50px;
     border-radius: 50px;
-    max-width: 50vw;
+    padding: 50px;
+    gap: 10px;
+    background-color: var(--secondary-color);
 }
 
 .create_panel_title {
-    color: var(--text-color);
-    margin-top: 0px;
-    margin-bottom: 10px;
+    margin: 0px;
 }
 
-.create_subpanel {
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--primary-color);
-    padding: 5px;
-    border-radius: 30px;
-    margin-bottom: 10px;
-    max-height: 500px;
-    max-width: 100%;
-}
-
-.minSize {
-    width: min-content;
-    height: min-content;
-}
-
-.create_subpanel:last-child {
-    margin-bottom: 0px;
-}
-
-.h {
-    flex-direction: row;
-}
-
-.v {
-    flex-direction: column;
-}
-
-.create_subpanel_item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-radius: 25px;
-    height: 50px;
-    padding: 5px;
-    margin-bottom: 5px;
-    background-color: var(--secondary-color);
-}
-
-.create_subpanel_item:last-child {
-    margin-bottom: 0px;
-}
-
-.create_subpanel_subitem {
-    border-radius: 20px;
-    width: 100%;
-    background-color: var(--primary-color);
-    height: 100%;
-    border: none;
-    padding: 10px;
-    font-size: 20px;
-    margin-right: 5px;
-}
-
-.create_subpanel_subitem:last-child {
-    margin-right: 0px;
-}
-
-.create_subpanel_subitem:hover {
-    filter: none;
-    transform: none;
-}
-
-.create_subpanel_item_icon {
+.create_create_type {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px;
-    padding: 0px;
-    font-size: 30px;
-    width: 30px;
-    transition: 125ms;
-    color: var(--text-color)
+    width: min-content;
+
+    height: min-content;
+    border-radius: 30px;
+    gap: 5px;
+    padding: 5px;
+    background-color: var(--primary-color);
 }
 
-.create_subpanel_item_icon:hover {
-    margin: 0px;
-    padding: 0px;
-    font-size: 32px;
-    color: var(--accent-color)
-}
-
-.create_subpanel_button {
-    padding: 0px;
-    border: none;
+.create_create_type_button {
+    min-width: 100px;
+    /* min-width: 200px; */
     border-radius: 25px;
-    margin-right: 5px;
-    width: 200px;
-    background-color: var(--secondary-color);
-}
-
-.create_subpanel_button_selected {
-    background-color: var(--accent-color);
-}
-
-.create_subpanel_button_selected:hover {
-    filter: drop-shadow(0.2604vw 0.2604vw var(--secondary-color));
-}
-
-.create_subpanel_button:last-child {
-    margin-right: 0px;
-}
-
-.create_subpanel_button>h4 {
-    margin: 0px;
+    border: none;
     padding: 10px;
+    background-color: var(--secondary-color);
+    outline: none;
+}
+
+.create_create_type_button>h4 {
+    margin: 0px;
     color: var(--text-color);
 }
 
-.create_subpanel_button_selected>h4 {
+.create_create_type_button_selected {
+    background-color: var(--accent-color);
+}
+
+.create_create_type_button_selected>h4 {
     color: var(--primary-color);
+    transition: 250ms;
+}
+
+.create_create_type_button_selected:hover {
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    transform: translate(-0.2604vw, -0.2604vw);
+    filter: drop-shadow(0.2604vw 0.2604vw var(--accent-color));
+}
+
+.create_create_type_button_selected:hover>h4 {
+    color: var(--accent-color);
+}
+
+.create_task_list {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 30px;
+    background-color: var(--primary-color);
+    padding: 5px;
+    gap: 5px;
+}
+
+.create_task_list_item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 25px;
+    padding: 5px;
+    gap: 5px;
+}
+
+.create_task_list_item_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 25px;
+    font-size: 28.48px;
+}
+
+/* .create_task_list_item_input_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    grid-template-rows: 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0px;
+    margin: 0px;
+} */
+
+.create_task_list_item_input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    padding-inline: 10px;
+    height: 100%;
+    /* width: 1f; */
+    width: 100%;
+    outline: none;
+    border: none;
+    max-width: 100px;
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.create_task_list_item_input>option:checked {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+
+
+
+.create_actions {
+    display: flex;
+    /* justify-content: flex-end; */
+    /* align-items: center; */
+    width: 100%;
+
+    height: min-content;
+    border-radius: 30px;
+    /* gap: 5px; */
+    padding: 5px;
+    background-color: var(--primary-color);
+}
+
+.create_action_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    border-radius: 25px;
+    border: none;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    outline: none;
+}
+
+.create_action_button>h4 {
+    margin: 0px;
+    /* color: var(--text-color); */
+}
+
+.flex_start {
+    justify-self: start;
+    justify-self: flex-start;
+    justify-self: left;
+}
+
+.flex_end {
+    justify-self: end;
+    justify-self: right;
+    justify-self: self-end;
 }

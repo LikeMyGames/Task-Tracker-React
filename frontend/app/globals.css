@@ -2,48 +2,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wdth,wght@62.5..100,100..900&family=Pixelify+Sans:wght@400..700&display=swap');
 
 .material-symbols-rounded {
-	font-size: 3.158rem;
-	/* font-weight: 700; */
-	font-variation-settings: 
+  font-size: 3.158rem;
+  /* font-weight: 700; */
+  font-variation-settings:
     'FILL' 1,
-		'wght' 400,
+    'wght' 400,
     'GRAD' 0,
     'opsz' 48;
   -webkit-user-select: none;
   user-select: none;
 }
 
-:root{
-	--main-font: "Pixelify Sans", Helvetica, sans-serif;
-	--mono-font: "Noto Sans Mono", monospace;
-	/* --background-color: #070907;
+:root {
+  --main-font: "Pixelify Sans", Helvetica, sans-serif;
+  --mono-font: "Noto Sans Mono", monospace;
+  /* --background-color: #070907;
 	--primary-color: #373737;
 	--secondary-color: #1c1c1c;
 	--accent-color: #92ff5c;
 	--text-color: #eaf1ec; */
-	--note-color: #5cb2ff;
-	--warning-color: #ffec5c;
-	--error-color: #ff5c5c;
+  --note-color: #5cb2ff;
+  --warning-color: #ffec5c;
+  --error-color: #ff5c5c;
 }
 
 @media only screen and (prefers-color-scheme: light) {
-	:root {
-		--text-color: #0e1510;
-		--background-color: #f6f8f6;
-		--primary-color: #c7c7c7;
-		--secondary-color: #e3e3e3;
-		--accent-color: #36a300;
-	}
+  :root {
+    --text-color: #0e1510;
+    --background-color: #f6f8f6;
+    --primary-color: #c7c7c7;
+    --secondary-color: #e3e3e3;
+    --accent-color: #36a300;
+  }
 }
 
 @media only screen and (prefers-color-scheme: dark) {
-	:root {
-		--text-color: #eaf1ec;
-		--background-color: #070907;
-		--primary-color: #373737;
-		--secondary-color: #1c1c1c;
-		--accent-color: #92ff5c;
-	}
+  :root {
+    --text-color: #eaf1ec;
+    --background-color: #070907;
+    --primary-color: #373737;
+    --secondary-color: #1c1c1c;
+    --accent-color: #92ff5c;
+  }
 }
 
 ::-moz-selection {
@@ -56,7 +56,8 @@
   background: var(--accent-color);
 }
 
-html, body {
+html,
+body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -114,77 +115,98 @@ a {
   }
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--main-font);
   font-weight: 700;
 }
 
 h1 {
-  font-size: 4.210rem; /* 67.36px */
+  font-size: 4.210rem;
+  /* 67.36px */
   font-family: var(--main-font);
   font-weight: 700;
 }
 
 h2 {
-  font-size: 3.158rem; /* 50.56px */
+  font-size: 3.158rem;
+  /* 50.56px */
   font-family: var(--main-font);
   font-weight: 700;
 }
 
 h3 {
-  font-size: 2.369rem; /* 37.92px */
+  font-size: 2.369rem;
+  /* 37.92px */
   font-family: var(--main-font);
   font-weight: 700;
 }
 
 h4 {
-  font-size: 1.777rem; /* 28.48px */
+  font-size: 1.777rem;
+  /* 28.48px */
   font-family: var(--main-font);
   font-weight: 700;
 }
 
 h5 {
-  font-size: 1.333rem; /* 21.28px */
+  font-size: 1.333rem;
+  /* 21.28px */
   font-family: var(--main-font);
   font-weight: 700;
 }
 
 small {
-  font-size: 0.750rem; /* 12px */
+  font-size: 0.750rem;
+  /* 12px */
   font-family: var(--main-font);
   font-weight: 700;
 }
 
-button, input, select, textarea {
-    transform: none;
-    filter: none;
-    transition: 250ms;
+button,
+input,
+select,
+textarea {
+  transform: none;
+  filter: none;
+  transition: 250ms;
 }
 
-button:hover, input:hover, select:hover, textarea:hover {
-    transform: translate(-0.2604vw, -0.2604vw);
-    filter: drop-shadow(0.2604vw 0.2604vw var(--accent-color));
+button:hover,
+input:hover,
+select:hover,
+textarea:hover {
+  transform: translate(-0.2604vw, -0.2604vw);
+  filter: drop-shadow(0.2604vw 0.2604vw var(--accent-color));
 }
 
-button:active, input:active, select:active, textarea:active {
-    transform: translate(-0.1302vw, -0.1302vw);
-    filter: drop-shadow(0.1302vw 0.1302vw var(--accent-color))
+button:active,
+input:active,
+select:active,
+textarea:active {
+  transform: translate(-0.1302vw, -0.1302vw);
+  filter: drop-shadow(0.1302vw 0.1302vw var(--accent-color))
 }
 
-input:focus, select:focus, textarea:focus {
-    transform: none;
-    filter: none;
+input:focus,
+select:focus,
+textarea:focus {
+  transform: none;
+  filter: none;
 }
 
 .error {
   background-color: var(--error-color);
   color: var(--primary-color);
-transition: 250ms;
+  transition: 250ms;
 }
 
 .error:hover {
   background-color: var(--primary-color);
-color: var(--error-color);
+  color: var(--error-color);
   filter: drop-shadow(5px 5px var(--error-color));
 }
 
@@ -206,14 +228,16 @@ color: var(--error-color);
   transition: 250ms;
 }
 
-.special:hover, .normal:hover {
-background-color: var(--primary-color);
-color: var(--accent-color);
+.special:hover,
+.normal:hover {
+  background-color: var(--primary-color);
+  color: var(--accent-color);
   transform: translate(-0.2604vw, -0.2604vw);
   filter: drop-shadow(0.2604vw 0.2604vw var(--accent-color));
 }
 
-.special:active, .normal:active {
+.special:active,
+.normal:active {
   transform: translate(-0.1302vw, -0.1302vw);
   filter: drop-shadow(0.1302vw 0.1302vw var(--accent-color))
 }
