@@ -1,4 +1,4 @@
-export interface Task {
+export type Task = {
 	id: string;
 	owner_id: string;
 	name: string;
@@ -7,6 +7,6 @@ export interface Task {
 	completion: number;
 	note: string;
 	dueDate: string;
-	dueTime: number;
+	dueTime: string;
 	repetition: string;
 }

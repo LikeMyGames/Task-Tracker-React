@@ -240,9 +240,12 @@ export default function Home() {
                 </div>
             </div>
 	        <div className={style.drag_region}></div> */}
-			<CreateTask list={undefined} close={(): void => {
-				throw new Error("Function not implemented.")
-			}} />
+			<CreateTask 
+				list={activeList ?? {} as List} 
+				// close={(): void => {
+				// 	throw new Error("Function not implemented.")
+				// }}
+			/>
 		</>
 	)
 }

@@ -1,6 +1,6 @@
 import { List } from "@/components/List"
 
-export interface User {
+export type User = {
     // username: string;
     // password: string;
     id: string;
@@ -8,7 +8,7 @@ export interface User {
     settings: unknown;
 }
 
-export interface AppSettings {
+export type AppSettings = {
     ListDirectory: string;
     APIPath: string;
     DeleteCompletedTasks: boolean;

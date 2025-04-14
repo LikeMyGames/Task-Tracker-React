@@ -1,0 +1,96 @@
+.create_task_list_item_input_container {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    margin: 0px;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+}
+
+.grid_row_1 {
+    grid-row: 1 / 2;
+}
+
+.grid_row_2 {
+    grid-row: 2 / 3;
+}
+
+.grid_row_3 {
+    grid-row: 3 / 4;
+}
+
+.grid_row_4 {
+    grid-row: 4 / 5;
+}
+
+.grid_row_5 {
+    grid-row: 5 / 6;
+}
+
+.grid_row_6 {
+    grid-row: 6 / 7;
+}
+
+.grid_column_1 {
+    grid-column: 1 / 2;
+}
+
+.grid_column_2 {
+    grid-column: 2 / 3;
+}
+
+.create_task_list_item_input_title {
+    color: var(--text-color);
+    font-size: 20px;
+    margin: 5px;
+    align-self: flex-start;
+}
+
+.create_task_list_item_input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    padding-inline: 10px;
+    height: max-content;
+    width: 100%;
+    outline: none;
+    border: none;
+    /* max-width: 100px; */
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    font-size: 20px;
+    margin: 0px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* textarea.create_task_list_item_input {
+    field-sizing: content;
+    resize: none;
+} */
+
+/* textarea.create_task_list_item_input::after {
+    content: attr(value) ' ';
+    white-space: pre-wrap;
+    visibility: hidden;
+    display: block;
+} */
+
+/* div.create_task_list_item_input {
+    word-break: break-all;
+    overflow: auto;
+    height: max-content;
+    transition: 250ms;
+}
+
+div.create_task_list_item_input:hover {
+    filter: drop-shadow(2.5px 2.5px var(--accent-color));
+    transform: translate(-2.5px, -2.5px);
+} */

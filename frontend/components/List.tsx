@@ -1,13 +1,13 @@
 import { Task } from "@/components/Task"
 
-export interface List {
+export type List = {
     id: string;
     owner_id: string;
     name: string;
     tasks: Task[];
 }
 
-export interface ListSearch {
+export type ListSearch = {
     name: string;
     index: number[];
     severity: number[];
