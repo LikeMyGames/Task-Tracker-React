@@ -20,12 +20,12 @@ const webAuth = new auth0.WebAuth(options)
 export default function LoginLanding() {
     useEffect(() => {
         let userInfo;
-        webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
+        webAuth.parseHash({ hash: window.location.hash }, function (err, authResult) {
             if (err) {
                 return console.log(err);
             }
 
-            webAuth.client.userInfo(authResult?.accessToken ?? "" , function(err, user) {
+            webAuth.client.userInfo(authResult?.accessToken ?? "", function (err, user) {
                 if (err) {
                     console.error(err);
                     return;

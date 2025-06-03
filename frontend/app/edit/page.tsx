@@ -1,47 +1,49 @@
 'use client'
 
-import style from "./page.module.css"
-import Icon from "@/components/Basic Components/Icon"
-import { getUser, createList, saveTask, getNextTaskID } from "@/app/actions/db"
+// import style from "./page.module.css"
+// import Icon from "@/components/Basic Components/Icon"
+// import { getUser, createList, saveTask, getNextTaskID } from "@/app/actions/db"
+import { getUser } from "@/app/actions/db"
 import { UserInfo } from "@/app/user/page"
 import { useEffect, useRef, useState } from "react"
 import { User } from "@/components/User"
-import ListOption from "./components/ListOption/ListOption"
-import ListOptionLoading from "./components/ListOption/ListOptionLoading"
-import { List, ListSearch } from "@/components/List"
-import { ListDataItem } from "./components/ListDataItem/ListDataItem"
-import { Task } from "@/components/Task"
-import { EditListAttributes } from "./components/EditAttributes/EditListAttributes"
-import { EditTaskAttributes } from "./components/EditAttributes/EditTaskAttributes"
+// import ListOption from "./components/ListOption/ListOption"
+// import ListOptionLoading from "./components/ListOption/ListOptionLoading"
+// import { List, ListSearch } from "@/components/List"
+// import { List } from "@/components/List"
+// import { ListDataItem } from "./components/ListDataItem/ListDataItem"
+// import { Task } from "@/components/Task"
+// import { EditListAttributes } from "./components/EditAttributes/EditListAttributes"
+// import { EditTaskAttributes } from "./components/EditAttributes/EditTaskAttributes"
 import { CreateTask } from "./components/CreateTask/CreateTask"
 
 export default function Home() {
 	const userInfoRef = useRef<UserInfo>(null);
 	const [user, setUser] = useState<User | null>(null)
-	const [activeListID, setActiveListID] = useState<string | null>(null)
-	const [activeList, setActiveList] = useState<List | null>(null)
-	const [activeTaskID, setActiveTaskID] = useState<string | null>(null)
-	const [activeTask, setActiveTask] = useState<Task | null>(null)
-	const [taskSearch, setTaskSearch] = useState<ListSearch | null>(null)
+	// const [activeListID, setActiveListID] = useState<string | null>(null)
+	// const [activeList, setActiveList] = useState<List | null>(null)
+	// const [activeTaskID, setActiveTaskID] = useState<string | null>(null)
+	// const [activeTask, setActiveTask] = useState<Task | null>(null)
+	// const [taskSearch, setTaskSearch] = useState<ListSearch | null>(null)
 
-	function changeActiveList(list: List | null) {
-		setActiveTask(null)
-		setActiveTaskID(null)
-		setActiveList(list)
-	}
+	// function changeActiveList(list: List | null) {
+	// 	setActiveTask(null)
+	// 	setActiveTaskID(null)
+	// 	setActiveList(list)
+	// }
 
 	// function changeActiveTask(task: Task | null) {
 	// 	console.log("new task: ", task)
 	// 	setActiveTask(task)
 	// }
 
-	function changeActiveListByID(id: string) {
-		setActiveTask(null)
-		setActiveListID(id)
-		setActiveList(user?.lists.find(list => {
-			return list.id == id
-		}) as List | null)
-	}
+	// function changeActiveListByID(id: string) {
+	// 	setActiveTask(null)
+	// 	setActiveListID(id)
+	// 	setActiveList(user?.lists.find(list => {
+	// 		return list.id == id
+	// 	}) as List | null)
+	// }
 
 	// function changeActiveTaskByID(id: string) {
 	// 	setActiveTaskID(id)
@@ -240,11 +242,11 @@ export default function Home() {
                 </div>
             </div>
 	        <div className={style.drag_region}></div> */}
-			<CreateTask 
-				list={activeList ?? {} as List} 
-				// close={(): void => {
-				// 	throw new Error("Function not implemented.")
-				// }}
+			<CreateTask
+			// list={activeList ?? {} as List}
+			// close={(): void => {
+			// 	throw new Error("Function not implemented.")
+			// }}
 			/>
 		</>
 	)

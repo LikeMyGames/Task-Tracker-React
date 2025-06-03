@@ -5,7 +5,7 @@ import { useState, createContext } from "react";
 // import Icon from "@/components/Basic Components/Icon";
 import { TaskItemCollapsed } from "./components/TaskItemCollapsed/TaskItemCollapsed";
 import { TaskItemExpanded } from "./components/TaskItemExpanded/TaskItemExpanded";
-import { List } from "@/components/List";
+// import { List } from "@/components/List";
 import Icon from "@/components/Basic Components/Icon";
 
 type Options = {
@@ -17,7 +17,7 @@ type Options = {
 
 export const TasksContext = createContext<{ tasks: Task[]; setTasks: (tasks: Task[]) => void }>({ tasks: [], setTasks: () => { } } as { tasks: Task[]; setTasks: (tasks: Task[]) => void })
 
-export function CreateTask({ list }: { list: List }) {
+export function CreateTask() {
     // console.log("owner_id for all tasks: ", list.id)
     const [options, setOptions] = useState<Options>({ batch: false, selected: "0", next_id: "0", next_task_index: 0 } as Options)
     const defaultTask = { id: options.next_id, owner_id: "0", name: "", task_index: 0, severity: 3, completion: 0, note: "", dueDate: "", dueTime: "", repetition: "never" } as Task

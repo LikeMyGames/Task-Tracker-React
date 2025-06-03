@@ -21,9 +21,9 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ['localhost:3000']
+      allowedOrigins: ['localhost:3000', '192.168.1.36:3000', 'tasktracker.dcamill.com']
     },
-  },
+  }
 };
 
 // console.log("Next.js config loaded:", nextConfig);

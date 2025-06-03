@@ -1,11 +1,11 @@
 import style from "@/app/page.module.css";
 import ListMenuItem from "@/components/Basic Component Groups/ListMenuItem";
-import { List } from "@/components/List Editing/ListView";
+import { List } from "@/components/List";
 import Button from "../Basic Components/Button";
 import { MouseEventHandler } from "react";
 
 export const ListMenu: React.FC<{ lists: List[]; menuItemOnClick?: MouseEventHandler<HTMLButtonElement>; }> = ({ lists, menuItemOnClick }) => {
-    return (
+	return (
 		<div className={style["list_menu"]}>
 			<h2 className={style["list_menu_title"]}>
 				Lists

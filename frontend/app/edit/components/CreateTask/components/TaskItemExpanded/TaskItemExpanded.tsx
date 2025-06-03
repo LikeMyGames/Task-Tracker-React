@@ -2,11 +2,11 @@
 import style from "./TaskItemExpanded.module.css"
 import { Task } from "@/components/Task"
 import { ExpandingTextarea } from "@/components/Basic Components/ExpandingTextarea/ExpandingTextarea";
-import { useContext } from "react";
-import { TasksContext } from "../../CreateTask";
+// import { useContext } from "react";
+// import { TasksContext } from "../../CreateTask";
 
 export function TaskItemExpanded({ task, setTask }: { task: Task; setTask: (task: Task) => void; }) {
-    const { tasks, setTasks } = useContext(TasksContext)
+    // const { tasks, setTasks } = useContext(TasksContext)
     // const [newTask, setNewTask] = useState({} as Task)
     return (
         <div className={style.create_task_list_item_input_container}>

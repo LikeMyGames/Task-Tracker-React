@@ -10,29 +10,29 @@ export default function manifest(): MetadataRoute.Manifest {
         orientation: "any",
         screenshots: [
             {
-                src:"/icons/PWA/screenshot_wide.png",
-                sizes:"3000x2000",
-                type:"image/png",
+                src: "/icons/PWA/screenshot_wide.png",
+                sizes: "3000x2000",
+                type: "image/png",
                 form_factor: "wide",
                 // description:"Standard view of tasks"
             },
             {
-                src:"/icons/PWA/screenshot_normal.png",
-                sizes:"2000x2000",
-                type:"image/png",
+                src: "/icons/PWA/screenshot_normal.png",
+                sizes: "2000x2000",
+                type: "image/png",
                 // description:"Standard view of tasks"
             }
         ],
         shortcuts: [
             {
-                name:"Docs",
-                url:"/docs",
-                description:"The sites documentation",
+                name: "Docs",
+                url: "/docs",
+                description: "The sites documentation",
                 icons: [
                     {
-                    src: "/icons/favicon/favicon-rounded-96x96.png",
-                    type: "image/png",
-                    sizes: "96x96"
+                        src: "/icons/favicon/favicon-rounded-96x96.png",
+                        type: "image/png",
+                        sizes: "96x96"
                     }
                 ]
             }
@@ -64,8 +64,8 @@ export default function manifest(): MetadataRoute.Manifest {
                 purpose: "any"
             }
         ],
-        theme_color: "#92ff5c",
-        background_color: "#92ff5c",
+        theme_color: "#070907",
+        background_color: "#070907",
         display: "standalone",
         display_override: ["fullscreen", "minimal-ui"]
     }

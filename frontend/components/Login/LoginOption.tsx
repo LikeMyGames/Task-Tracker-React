@@ -1,4 +1,4 @@
-
+'use client'
 import { login, loginProvider, signup } from "@/app/actions"
 
 import style from "@/components/Login/Login.module.css";
@@ -13,11 +13,61 @@ import { redirect } from "next/navigation";
 
 export default function LoginOption() {
 	const [choice, setChoice] = useState("login");
+	// const [windowDimensions, setWindowDimensions] = useState<Dimensions | null>({
+	// 	width: window.innerWidth,
+	// 	height: window.innerHeight,
+	// });
 
-	if(choice === "login") {
+	// useEffect(() => {
+	// 	const handleResize = () => {
+	// 		setWindowDimensions({
+	// 			width: window.innerWidth,
+	// 			height: window.innerHeight,
+	// 		});
+	// 	};
+
+	// 	window.addEventListener('resize', handleResize);
+	// 	return () => window.removeEventListener('resize', handleResize); // Cleanup
+	// }, []);
+
+	// if (windowDimensions == null) {
+	// 	return (
+	// 		<>
+	// 		</>
+	// 	)
+	// }
+
+	// if (windowDimensions.width / windowDimensions.height < 1.3) {
+	// 	return (
+	// 		<div className={style.main}>
+	// 			<div className={style.card_mobile}>
+	// 				{
+	// 					choice == "login" ? (
+	// 						<>
+	// 						</>
+	// 					) : choice == "create" ? (
+	// 						<></>
+	// 					) : choice == "local" ? (
+	// 						<></>
+	// 					) : (<></>)
+	// 				}
+	// 				<div className={style.action_container_mobile}>
+	// 					<button className={style.action_button_mobile}>
+	// 						<h3>Create</h3>
+	// 					</button>
+	// 					<button className={style.action_button_mobile}>
+	// 						<h3>Local</h3>
+	// 					</button>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
+
+	if (choice === "login") {
 		return (
 			<div className={style.main}>
-				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => {setChoice("create")}}>
+				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => { setChoice("create") }}>
 					<Icon>person_add</Icon>
 				</button>
 				<form action={login} className={`${style.card} ${style.card_big}`}>
@@ -37,29 +87,37 @@ export default function LoginOption() {
 						<div className={style.card_option_seperator_bar} />
 						<div className={style.card_option_seperator_text} >or continue with</div>
 					</div>
-					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('google-oauth2')}}>
-						<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
-						<h3 className={style.card_button_text} style={{
-							color: "var(--text-color)"
-						}}>
-							Google
-						</h3>
-					</button>
-					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('github')}}>
-						<Image alt="Github Icon" src={GithubIcon} className={style.card_option_icon}></Image>
-						<h3 className={style.card_button_text} style={{
-							color: "var(--text-color)"
-						}}>
-							Github
-						</h3>
-					</button>
+					<div className={style.card_oauth_providers}>
+						<button type={"button"} className={style.card_option} onClick={() => { loginProvider('google-oauth2') }}>
+							<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
+							<h3 className={style.card_option_text}>
+								Google
+							</h3>
+						</button>
+						<button type={"button"} className={style.card_option} onClick={() => { loginProvider('github') }}>
+							<Image alt="Github Icon" src={GithubIcon} className={style.card_option_icon}></Image>
+							<h3 className={style.card_option_text}>
+								Github
+							</h3>
+						</button>
+					</div>
+					<div className={style.action_container} onClick={() => { setChoice("create") }}>
+						<button className={style.action_button}>
+							<Icon iconName={"chevron_left"} />
+							<h3 className={style.action_button_text_left}>Create Account</h3>
+						</button>
+						<button className={style.action_button} onClick={() => { setChoice("local") }}>
+							<h3 className={style.action_button_text_right}>Use Locally</h3>
+							<Icon iconName={"chevron_right"} />
+						</button>
+					</div>
 				</form>
-				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => {setChoice("local")}}>
+				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => { setChoice("local") }}>
 					<Icon>devices</Icon>
 				</button>
 			</div>
 		);
-	} else if (choice  === "create") {
+	} else if (choice === "create") {
 		return (
 			<div className={style.main}>
 				{/* <Head>
@@ -67,7 +125,7 @@ export default function LoginOption() {
 					<link rel="icon" type="image/svg+xml" href="@/public/icons/favicon/favicon.svg" />
 					<link rel="shortcut icon" href="@/public/icons/favicon/favicon.ico" />
 				</Head> */}
-				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => {setChoice("local")}}>
+				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => { setChoice("local") }}>
 					<Icon>devices</Icon>
 				</button>
 				<form action={signup} className={`${style.card} ${style.card_big}`}>
@@ -87,7 +145,7 @@ export default function LoginOption() {
 						<div className={style.card_option_seperator_bar} />
 						<div className={style.card_option_seperator_text} >or continue with</div>
 					</div>
-					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('google-oauth2')}}>
+					<button type={"button"} className={style.card_option} onClick={() => { loginProvider('google-oauth2') }}>
 						<Image alt="Google Icon" src={GoogleIcon} className={style.card_option_icon}></Image>
 						<h3 className={style.card_button_text} style={{
 							color: "var(--text-color)"
@@ -95,7 +153,7 @@ export default function LoginOption() {
 							Google
 						</h3>
 					</button>
-					<button type={"button"} className={style.card_option} onClick={() => {loginProvider('github')}}>
+					<button type={"button"} className={style.card_option} onClick={() => { loginProvider('github') }}>
 						<Image alt="Github Icon" src={GithubIcon} className={style.card_option_icon}></Image>
 						<h3 className={style.card_button_text} style={{
 							color: "var(--text-color)"
@@ -104,7 +162,7 @@ export default function LoginOption() {
 						</h3>
 					</button>
 				</form>
-				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => {setChoice("login")}}>
+				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => { setChoice("login") }}>
 					<Icon>person</Icon>
 				</button>
 			</div>
@@ -117,7 +175,7 @@ export default function LoginOption() {
 					<link rel="icon" type="image/svg+xml" href="@/public/icons/favicon/favicon.svg" />
 					<link rel="shortcut icon" href="@/public/icons/favicon/favicon.ico" />
 				</Head> */}
-				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => {setChoice("login")}}>
+				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => { setChoice("login") }}>
 					<Icon>person</Icon>
 				</button>
 				<form action={login} className={`${style.card} ${style.card_big}`}>
@@ -144,7 +202,7 @@ export default function LoginOption() {
 						<h3 className={style.card_button_text}>Learn More</h3>
 					</Button>
 				</form>
-				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => {setChoice("create")}}>
+				<button type={"button"} className={`${style.card} ${style.card_small}`} onClick={() => { setChoice("create") }}>
 					<Icon>person_add</Icon>
 				</button>
 			</div>

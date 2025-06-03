@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 // import { Auth0Provider } from "@auth0/auth0-react";
@@ -17,30 +17,38 @@ const pixelifySans = Pixelify_Sans({
 // });
 
 export const metadata: Metadata = {
-  title: {
-	default: 'Task Tracker',
-	template: '%s | Task Tracker'
-  },
-  description: "A Web App that allows users to keep track of and manage their tasks",
-  icons: [
-	{ rel: "icon", url: "/icon.png" },
-	{ rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
-	{ rel: "icon", url: "/icons/favicon/favicon-96x96.png", type: "image/png", sizes: "96x96" },
-	{ rel: "icon", url: "/icons/favicon/favicon.svg", type: "image/svg+xml" },
-	{ rel: "shortcut icon", url: "/favicon.ico", sizes: "256x256 128x128 64x64 32x32"}
-  ]
+	title: {
+		default: 'Task Tracker',
+		template: '%s | Task Tracker'
+	},
+	description: "A Web App that allows users to keep track of and manage their tasks",
+	icons: [
+		{ rel: "icon", url: "/icon.png" },
+		{ rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
+		{ rel: "icon", url: "/icons/favicon/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+		{ rel: "icon", url: "/icons/favicon/favicon.svg", type: "image/svg+xml" },
+		{ rel: "shortcut icon", url: "/favicon.ico", sizes: "256x256 128x128 64x64 32x32" }
+	]
 };
 
+export const viewport: Viewport = {
+	width: "device-width",
+	initialScale: 1.0,
+	maximumScale: 1.0,
+	userScalable: false,
+	viewportFit: "auto"
+}
+
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
 	return (
 		<html lang="en" className={`${pixelifySans.variable}`}>
 			<body>
-        		{children}
-     		</body>
-    	</html>
-  	);
+				{children}
+			</body>
+		</html>
+	);
 }
